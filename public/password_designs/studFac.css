@@ -1,0 +1,260 @@
+/*  styling scrollbars  */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #453ea1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #453ea1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #453ea1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'poppins';
+}
+
+body {
+  box-sizing: border-box;
+  background: #cdecff70;
+}
+
+.text-primary-p {
+  color: #a5aaad;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.container {
+  display: grid;
+  height: 100vh;
+  grid-template-columns:1fr 1fr 1fr;
+  grid-template-rows: 0.2fr 3fr;
+  grid-template-areas:
+    "nav nav nav"
+    "main main main";
+  /* grid-gap: 0.2rem; */
+}
+
+
+.navbar {
+  background: #cdecff;
+  grid-area: nav;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px 0 30px;
+  z-index: 2;
+  border-bottom: 1px solid lightgray;
+}
+
+
+#logo{
+  width: 150px;
+  height: auto;
+  cursor: pointer;
+ }
+  
+#logo:hover{
+  transform: scale(1.1);
+}
+
+
+.navbar_right{
+  display: flex;   
+}
+
+.navbar_right img{
+ width: 40px;
+ border-radius: 5px;  
+}
+
+
+
+.navbar_right .icon_wrap{
+ cursor: pointer; 
+}
+
+.navbar_right .profile{
+ position: relative;  
+}
+
+
+main {
+  background: #ecf0f3;
+  grid-area: main;
+  overflow-y: auto;
+ 
+}
+
+.main__container {
+  padding: 45px 35px;
+}
+
+
+
+@media only screen and (max-width: 855px) {
+  .main__cards {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 0;
+  }
+
+  .charts {
+    grid-template-columns: 1fr;
+    margin-top: 30px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .navbar__left {
+    display: none;
+  }
+}
+
+.addbox{
+  width: 95%;
+  background-color: rgb(255, 255, 255);
+  padding: 25px 30px;
+  border-radius: 5px;    
+}
+
+@media(max-width: 584px){
+ .addbox{
+  max-width: 100%;
+}
+form .user-details .input-box{
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  form .category{
+    width: 100%;
+  }
+  .addcontent form .user-details{
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .user-details::-webkit-scrollbar{
+    width: 5px;
+  }
+  }
+  @media(max-width: 459px){
+  .addbox .addcontent .category{
+    flex-direction: column;
+  }
+}
+
+.printbtn {
+  margin: auto;
+  padding: 10px 16px;
+  font-size: 20px;
+  border-radius: 0.25rem;
+  letter-spacing: 3px;
+  font-weight: 600;
+  color: white;
+  background-color: #386bc8;
+  cursor: pointer;
+}
+
+
+/*password change*/
+
+.addbox > h1{
+  text-transform: uppercase;
+  color: #453ea1;
+  text-decoration: underline;
+}
+
+.divbox .addbox{
+  width: 95%;
+  background-color: rgb(255, 255, 255);
+  padding: 25px 30px;
+  border-radius: 5px;
+  font-family: 'Poppins',sans-serif;
+    
+}
+
+.divbox .addcontent form .user-details{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 20px 0 12px 0;
+}
+form .user-details .input-box{
+  margin-bottom: 15px;
+  margin-right: 20px;
+  width: calc(100% / 2 - 40px);
+}
+
+.user-details .input-box input{
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.user-details .input-box input:focus,
+.user-details .input-box input:valid{
+  border-color: #9b59b6;
+}
+
+form .button{
+   height: 45px;
+   margin: 35px 0
+}
+form .button input{
+   height: 100%;
+   width: 100%;
+   border-radius: 5px;
+   border: none;
+   color: #fff;
+   font-size: 18px;
+   font-weight: 500;
+   letter-spacing: 1px;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+ form .button input:hover{
+  /* transform: scale(0.99); */
+  background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+  }
+@media(max-width: 584px){
+ .addbox{
+  max-width: 100%;
+}
+form .user-details .input-box{
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  form .category{
+    width: 100%;
+  }
+  .addcontent form .user-details{
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .user-details::-webkit-scrollbar{
+    width: 5px;
+  }
+  }
+  @media(max-width: 459px){
+  .addbox .addcontent .category{
+    flex-direction: column;
+  }
+}

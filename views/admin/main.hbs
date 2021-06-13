@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/admin_designs/css/styles.css" />
+    <link rel="icon" href="/logos/logo.png" type="image/icon type">
+    <!--Poppins-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <!--Poppins-->
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>DIS | ADMIN</title>
+  </head>
+  <body id="body">
+    <div class="container">
+      <nav class="navbar">
+        <div id="dp-name">
+        <img src={{user.profile_picture}} alt="" id="top_dp"/>
+        <div id="dp-sub">
+        <h1>Hello : {{user.name}}</h1>
+        <p>Session: <span id="clock"></span></p> 
+        </div>
+        </div>
+        <div class="logout" onclick="togglePopup()"><i class="fa fa-power-off" ></i><a href="/logout">Log out</a></div>
+      </nav>
+      <!--Popup-->
+    <div class="popup" id="popup-1">
+      <div class="overlay"></div>
+      <div class="content">
+        <h1>Thank You!</h1>
+        <p>Session ended.</p>
+        <h5>Redirecting now<a class="wavy">
+          <span style="--i:1;">.</span>
+          <span style="--i:2;">.</span>
+          <span style="--i:3;">.</span>
+          <span style="--i:4;">.</span></a></h5>
+      </div>
+     </div>
+
+<!--Home page  main starts-->
+      <main id="home">
+        <div class="main__container">         
+
+          <!-- MAIN CARDS STARTS HERE -->
+          <div class="main__cards">
+
+              <button class="card" onclick="location.assign('/admin/student')">
+                <div class="card_inner">
+                   <i class="fas fa-user-graduate"></i>
+                   Students Panel
+                   {{!-- <span>+2</span> --}}
+                </div>
+              </button>
+
+            
+              <button  class="card" onclick="location.assign('/admin/teacher')">
+                <div class="card_inner">
+                  <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
+                  Teachers Panel
+                  {{!-- <span>+2</span> --}}
+                </div>
+              </button>
+            
+
+            <button class="card">
+               <div class="card_inner">
+                <i class="fa fa-question"></i>
+                Requets Pending
+                <span>+{{req_count}}</span>
+              </div>
+            </button>
+
+            <button class="card" onclick="location.assign('/settingf/admin')">
+               <div class="card_inner">
+                <i class="fa fa-cog"></i>
+                Account
+                {{!-- <span>+2</span> --}}
+              </div>
+            </button>
+          </div>
+          <!-- MAIN CARDS ENDS HERE -->
+
+          <!-- CHARTS STARTS HERE -->
+          <div class="charts">
+            <div class="charts__left">
+              <div class="charts__left__title">
+                <div>
+                  <h1>Quaterly Performance Report</h1>
+                  <p></p>
+                </div>
+                <i class="fas fa-chart-area" aria-hidden="true"></i>
+              </div>
+              <canvas id="lineChart" ></canvas>
+            </div>
+
+            <div class="charts__right">
+              <div class="charts__right__title">
+                <div>
+                  <h1>Stats Reports</h1>
+                  <p></p>
+                </div>
+                <i class="fas fa-th" aria-hidden="true"></i>
+              </div>
+
+              <div class="charts__right__cards" >
+                <div class="card1" onclick="mainshow10()">
+                  <h1>News</h1>
+                  <p>update/delete</p>
+                </div>
+
+                <div class="card2" onclick="mainshow14()">
+                  <h1>Notice</h1>
+                  <p>update/delete</p>
+                </div>
+
+                <div class="card3">
+                  <h1>New Report</h1>
+                  <p>create/edit</p>
+                </div>
+
+                <div class="card4">
+                  <h1>IQAC</h1>
+                  <p>reports updates</p>
+                </div>
+
+                <div class="card5">
+                  <h1>UGC</h1>
+                  <p>reports update</p>
+                </div>
+
+                <div class="card6">
+                   <h1>NBA</h1>
+                  <p>reports updates</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- CHARTS ENDS HERE -->
+        </div>
+      </main>
+<!--Home page  main ends-->
+
+
+ <!--main 1 admn management-->
+ <main id="main1">
+  <div class="main__container">
+     
+
+    <!-- Buttons STARTS HERE -->
+   
+         <div class="btns">
+             <br>
+              <h1>Admin Management</h1>
+              <div class="small_cards">
+                  <button class="card" onclick="show_hide1()">
+                      <div class="card_inner">
+                      <a class="text-primary-p">Add Admin</a>
+                      </div>
+                  </button>  
+      
+                  <button class="card" onclick="show_hide2()">
+                  <div class="card_inner">
+                      <a class="text-primary-p">Delete Admin</a>
+                      </div>
+                  </button>
+      
+                  <button class="card" onclick="show_hide3()">
+                      <div class="card_inner">
+                      <a class="text-primary-p">Update Admin details </a> 
+                      </div>
+                  </button>
+      
+                  <button class="card" onclick="show_hide4()">
+                      <div class="card_inner">
+                      <a class="text-primary-p">Full list</a>
+                      </div>
+                  </button>
+              </div>
+          </div>
+    
+    <!-- buttons ENDS HERE -->
+
+    <!-- clickdivs start HERE -->
+      <div class="divbox">
+     <!-- clickdiv1 -->
+          <div class="addbox"  id="one">
+            <div class="title"><span>Add Admin</span></div>
+            <div class="addcontent">
+              <form action="/admin/addAdmin" enctype="multipart/form-data" method="POST">
+                <div class="user-details">
+                  <div class="input-box">
+                    <span class="details">Permanent Employee id</span>
+                    <input type="text" placeholder="Permanent Employee id" id="admin_pen" name="pen" required>
+                    <div id="admin_response" style="color: red;"></div>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Name</span>
+                    <input type="text" placeholder="Enter your name" name="name" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Date of Birth</span>
+                    <input type="date" name="dob" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Email</span>
+                    <input type="email" placeholder="Enter your email" name="email" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Phone Number</span>
+                    <input type="text" placeholder="Enter your number" name="phone" pattern="[0-9]+" maxlength="10" minlength="10" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Address</span>
+                    <input type="text" placeholder="Enter your address" name="address" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">City</span>
+                    <input type="text" placeholder="City" name="city" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">District</span>
+                    <input type="text" placeholder="District" name="district" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">State/UT</span>
+                    <input type="text" placeholder="State/Union Territory" name="state" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Pincode</span>
+                    <input type="text" placeholder="Pincode" name="pincode" pattern="[0-9]+" required>
+                  </div> 
+                  <div class="input-box">
+                    <span class="details">Date of Joining</span>
+                    <input type="date" placeholder="Date of Joining" name="date_of_joining" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">College</span>
+                    <input type="text" placeholder="School of Engineering" disabled>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Division</span>
+                    <input type="text" placeholder="Computer Science and Engineering" disabled>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Upload file</span>
+                    <input type="file" required style="padding-top: 5px;">
+                  </div>
+                   
+                </div>
+                <div class="gender-details">
+                  <input type="radio" name="gender" id="dot-1" value="male">
+                  <input type="radio" name="gender" id="dot-2" value="female">
+                  <input type="radio" name="gender" id="dot-3" value="prefer not to say">
+                  <span class="gender-title">Gender</span>
+                  <div class="category">
+                    <label for="dot-1">
+                    <span class="dot one"></span>
+                    <span class="gender">Male</span>
+                  </label>
+                  <label for="dot-2">
+                    <span class="dot two"></span>
+                    <span class="gender">Female</span>
+                  </label>
+                  <label for="dot-3">
+                    <span class="dot three"></span>
+                    <span class="gender">Prefer not to say</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="button">
+                  <input type="submit" value="Register">
+                </div>
+              </form>
+            </div>
+          </div>
+     <!-- clickdiv1 -->
+          
+     <!-- clickdiv2 -->
+          <div class="addbox" id="two">
+            <div class="title">Delete Admin</div>
+            <table>
+              <thead>
+                <tr>
+                    <th>Permanent Employee ID</th>
+                    <th>Name</th>
+                    <th>Date of Joining</th>
+                    <th>Action</th>
+                 </tr>
+             </thead>
+             {{#each admins}}
+              <tr>
+                  <td>{{this.pen_id}}</td>
+                  <td>{{this.name}}</td>
+                  <td>{{this.date_of_joining}}</td>
+                  <td><button id={{this.pen_id}} onclick="dlt_admin(this.id)">Delete</button></td>
+              </tr>
+             {{/each}} 
+            </table>
+          </div>
+     <!-- clickdiv2 -->
+
+     <!-- clickdiv3 -->
+          <div class="addbox" id="three">
+            <div class="title">Update Admin</div>
+            <div class="addcontent">
+              <form action="/admin/updateAdmin" method="POST" enctype="multipart/form-data" onsubmit="return confirm('Confirmed your update');">
+                <div class="user-details">
+                  <div class="input-box">
+                    <span class="details">Admin ID</span>
+                    <input type="text" placeholder="Admin ID" required value={{user.admin_id}} readonly>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Permanent Employee ID</span>
+                    <input type="text" placeholder="Permanent Employee ID" value={{user.pen_id}} readonly>
+                    
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Name</span>
+                    <input type="text" placeholder="name" name="name" required value={{user.name}}>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Date of Birth</span>
+                    <input type="date" name="dob"  required value={{user.DOB}} >
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Email</span>
+                    <input type="email" placeholder="email" name="email" value={{user.email}} required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Phone Number</span>
+                    <input type="text" placeholder="number" name="phone" required value={{user.phone}}>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Address</span>
+                    <input type="text" placeholder="address" name="address" required value={{user.address}}>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">City</span>
+                    <input type="text" placeholder="City" name="city" required value={{user.post}}>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">District</span>
+                    <input type="text" placeholder="District" name="district" required value={{user.district}}>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">State/UT</span>
+                    <input type="text" placeholder="State/Union Territory" name="state" required value={{user.state}}>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Pincode</span>
+                    <input type="text" placeholder="Pincode" name="pincode" required value={{user.pincode}}>
+                  </div> 
+                  <div class="input-box">
+                    <span class="details">Date of Joining</span>
+                    <input type="date" placeholder="Date of Joining" name="date_of_joining" required value={{user.date_of_joining}}>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">College</span>
+                    <input type="text" placeholder="School of Engineering" disabled>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Division</span>
+                    <input type="text" placeholder="Computer Science and Engineering" disabled>
+                  </div>     
+                </div>
+                <div class="button">
+                  <input type="submit" value="Update">
+                </div>
+              </form>
+            </div>
+          </div>
+     <!-- clickdiv3 -->
+
+     <!-- clickdiv4 -->
+    <div class="addbox" id="four">
+      <div class="title">List of Admins</div>
+      <table >
+        <thead>
+           <tr>
+               <th>Permanent Employee ID</th>
+               <th>Name</th>
+               <th>Date of birth</th>
+               <th>Email</th>
+               <th>Phone</th>
+               <th>Address</th>
+               <th>City</th>
+               <th>District</th>
+               <th>State/UT</th>
+               <th>Pincode</th>
+               <th>Date of joining</th>
+            </tr>
+        </thead>
+        {{#each admins}}
+          <tr>
+              <td>{{this.pen_id}}</td>
+              <td>{{this.name}}</td>
+              <td>{{this.DOB}}</td>
+              <td>{{this.email}}</td>
+              <td>{{this.phone}}</td>
+              <td>{{this.address}}</td>
+              <td>{{this.post}}</td>
+              <td>{{this.district}}</td>
+              <td>{{this.state}}</td>
+              <td>{{this.pincode}}</td>
+              <td>{{this.date_of_joining}}</td>
+          </tr>
+        {{/each}}
+      </table>
+    </div>
+     <!-- clickdiv4 -->
+      </div>
+    <!-- clickdivs ENDS HERE -->
+</main>
+<!-- main 1 admn managemnt-->
+
+
+ <!--main 2 admn mangemnt-->
+ <main id="main2">
+  <div class="main__container">
+   
+
+    <!-- Buttons STARTS HERE -->
+   
+         <div class="btns">
+             <br>
+              <h1>Teacher Management</h1>
+              <div class="small_cards">
+                  <button class="card" onclick="show_hide5()">
+                      <div class="card_inner">
+                      <a class="text-primary-p">Add Teacher</a>
+                      </div>
+                  </button>  
+      
+                  <button class="card" onclick="show_hide6()">
+                  <div class="card_inner">
+                      <a class="text-primary-p">Delete Teacher</a>
+                      </div>
+                  </button>
+                  <button class="card" onclick="show_hide6u()">
+                    <div class="card_inner">
+                        <a class="text-primary-p">Update</a>
+                        </div>
+                  </button>   
+                
+      
+                  <button class="card" onclick="show_hide8()">
+                      <div class="card_inner">
+                      <a class="text-primary-p">Full list</a>
+                      </div>
+                  </button>
+              </div>
+          </div>
+    
+    <!-- buttons ENDS HERE -->
+
+    <!-- clickdivs start HERE -->
+      <div class="divbox">
+     <!-- clickdiv1 -->
+          <div class="addbox"  id="tone">
+            <div class="title">Add Teacher</div>
+            <div class="addcontent">
+              <form action="/admin/addTeacher" enctype="multipart/form-data" method="POST">
+                <div class="user-details">
+                  <div class="input-box">
+                    <span class="details">Permanent Employee ID</span>
+                    <input type="text" placeholder="Permanent Employee ID" id="tchr_pen" name="pen" required>
+                    <div id="tchr_response" style="color: red;"></div>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Name</span>
+                    <input type="text" placeholder="Enter your name" name="name" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Current Designation</span>
+                    <input type="text" placeholder="Designation" name="designation" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Date of Birth</span>
+                    <input type="date" name="dob" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Email</span>
+                    <input type="email" placeholder="Enter your email" name="email" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Phone Number</span>
+                    <input type="text" placeholder="Enter your number" name="phone" pattern="[0-9]+" minlength="10" maxlength="10" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Address</span>
+                    <input type="text" placeholder="Enter your address" name="address" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">City</span>
+                    <input type="text" placeholder="City" name="city" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">District</span>
+                    <input type="text" placeholder="District" name="district" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">State/UT</span>
+                    <input type="text" placeholder="State/Union Territory" name="state" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Pincode</span>
+                    <input type="text" placeholder="Pincode" name="pincode" required>
+                  </div> 
+                  <div class="input-box">
+                    <span class="details">Date of Joining</span>
+                    <input type="date" placeholder="Date of Joining" name="date_of_joining" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">College</span>
+                    <input type="text" placeholder="School of Engineering" disabled>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Division</span>
+                    <input type="text" placeholder="Computer Science and Engineering" disabled>
+                  </div>     
+                  <div class="inputfield">
+                    <span class="details">Upload Photo</span>
+                    <input type="file" accept="image/jpeg" class="input" name="photo" required>
+                  </div>
+                </div>
+                <div class="gender-details">
+                  <input type="radio" name="gender" id="dot-7" value="male">
+                  <input type="radio" name="gender" id="dot-8" value="female">
+                  <input type="radio" name="gender" id="dot-9" value="prefer no to say">
+                  <span class="gender-title">Gender</span>
+                  <div class="category">
+                    <label for="dot-7">
+                    <span class="dot one"></span>
+                    <span class="gender">Male</span>
+                  </label>
+                  <label for="dot-8">
+                    <span class="dot two"></span>
+                    <span class="gender">Female</span>
+                  </label>
+                  <label for="dot-9">
+                    <span class="dot three"></span>
+                    <span class="gender">Prefer not to say</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="button">
+                  <input type="submit" value="Register">
+                </div>
+              </form>
+            </div>
+          </div>
+     <!-- clickdiv1 -->
+          
+     <!-- clickdiv2 -->
+          <div class="addbox" id="ttwo">
+            <div class="title">Delete Teacher</div>
+            <table>
+              <thead>
+                 <tr>
+                     <th>Permanent Employee ID</th>
+                     <th>Name</th>
+                     <th>Date of Joining</th>
+                     <th>Action</th>
+                  </tr>
+              </thead>
+              {{#each teachers}}
+                <tr>
+                    <td>{{this.PEN_ID}}</td>
+                    <td>{{this.name}}</td>
+                    <td>{{this.year_of_joining}}</td>
+                    <td><button id={{this.PEN_ID}} onclick="dlt_tchr(this.id)">Delete</button></td>
+                </tr>
+              {{/each}}
+            </table>
+          </div>
+     <!-- clickdiv2 -->
+
+     <!-- clickdiv3 -->
+          <div class="addbox" id="tthree">
+            <div class="title">Update teacher details</div>
+            <div class="addcontent">
+              <form action="/admin/updateTeacher" method="POST" enctype="multipart/form-data">
+                <div class="user-details">
+                  <div class="input-box">
+                    <span class="details">Select Acount</span>
+                    <select id="tchrselect" name="select">
+                      <option value="" selected disabled hidden>Permanent Employee id</option>
+                      {{#each teachers}}
+                      <option value = {{this.PEN_ID}}> {{this.PEN_ID}} </option>
+                      {{/each}}
+                    </select>
+                  </div>
+                   <div class="input-box">
+                    <span class="details">Name</span>
+                    <input type="text" placeholder="name" id="tname" name="name" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Permanent Employee ID</span>
+                    <input type="text" placeholder="Permanent Employee ID" id="tpen" name="pen_id" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Date of Birth</span>
+                    <input type="date" id="tdob" name="dob" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Date of Joining</span>
+                    <input type="date" placeholder="Date of Joining" id="tdoj" name="doj" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Gender</span>
+                    <input type="text" placeholder="Gender" id="tgender" name="gender" required>
+                  </div>
+                </div>
+                <div class="button">
+                  <input type="submit" value="Submit">
+                </div>
+              </form>
+            </div>            
+          </div>
+     <!-- clickdiv3 -->     
+
+     <!-- clickdiv4 -->
+     <div class="addbox" id="tfour">
+      <div class="title">List of Teachers</div>
+      <table>
+        <thead>
+           <tr>
+               <th>Permanent Employee ID</th>
+               <th>Name</th>
+               <th>Date of birth</th>
+               <th>Email</th>
+               <th>Phone</th>
+               <th>Address</th>
+               <th>City</th>
+               <th>District</th>
+               <th>State/UT</th>
+               <th>Pincode</th>
+               <th>Date of joining</th>
+            </tr>
+        </thead>
+        {{#each teachers}}
+          <tr>
+              <td>{{this.PEN_ID}}</td>
+              <td>{{this.name}}</td>
+              <td>{{this.DOB}}</td>
+              <td>{{this.email}}</td>
+              <td>{{this.phone}}</td>
+              <td>{{this.phone}}</td>
+              <td>{{this.post}}</td>
+              <td>{{this.district}}</td>
+              <td>{{this.state}}</td>
+              <td>{{this.pincode}}</td>
+              <td>{{this.year_of_joining}}</td>
+          </tr>
+        {{/each}}
+      </table>
+    </div>
+     <!-- clickdiv4 -->
+      </div>
+    <!-- clickdivs ENDS HERE -->
+</main>
+<!--main 2 admn mangemnt-->
+
+ <!--main 3 of admn managmnt-->
+ <main id="main3">
+  <div class="main__container">
+    
+
+   
+
+    <!-- Buttons STARTS HERE -->
+   
+         <div class="btns">
+             <br>
+              <h1>Student Management</h1>
+              <div class="small_cards">
+                  <button class="card" onclick="show_hide9()">
+                      <div class="card_inner">
+                      <a class="text-primary-p">Add Student</a>
+                      </div>
+                  </button>  
+      
+                  <button class="card" onclick="show_hide10()">
+                  <div class="card_inner">
+                      <a class="text-primary-p">Delete Student</a>
+                      </div>
+                  </button>
+                  <button class="card" onclick="show_hide10u()">
+                    <div class="card_inner">
+                        <a class="text-primary-p">Update</a>
+                        </div>
+                  </button>   
+      
+                             
+                  <button class="card" onclick="show_hide12()">
+                      <div class="card_inner">
+                      <a class="text-primary-p">Full list</a>
+                      </div>
+                  </button>
+              </div>
+          </div>
+    
+    <!-- buttons ENDS HERE -->
+
+    <!-- clickdivs start HERE -->
+      <div class="divbox">
+     <!-- clickdiv1 -->
+          <div class="addbox"  id="sone">
+            <div class="title">Add Student</div>
+            <div class="addcontent">
+              <form action="/admin/addStudent" enctype="multipart/form-data" method="POST">
+                <div class="user-details">
+                  <div class="input-box">
+                    <span class="details">Register Number</span>
+                    <input type="text" placeholder="Register Number" id="register" name="reg_no" pattern="[0-9]+" maxlength="10" required>
+                    <div id="std_response" style="color: red;"></div>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Admission Number</span>
+                    <input type="text" placeholder="Admission Number" name="admn_no" pattern="[0-9]+" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Name</span>
+                    <input type="text" placeholder="Enter your name" name="name" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Date of Birth</span>
+                    <input type="date" name="dob" id="datePickerId" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Email</span>
+                    <input type="email" placeholder="Enter your email" name="email" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Phone Number</span>
+                    <input type="text" placeholder="Enter your number" name="phone" pattern="[0-9]+" minlength="10" maxlength="10" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Address</span>
+                    <input type="text" placeholder="Enter your address" name="address" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">City</span>
+                    <input type="text" placeholder="City" name="city" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">District</span>
+                    <input type="text" placeholder="District" name="district" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">State/UT</span>
+                    <input type="text" placeholder="State/Union Territory" name="state" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Pincode</span>
+                    <input type="text" placeholder="Pincode" name="pincode" required>
+                  </div> 
+                  <div class="input-box">
+                    <span class="details">Date of Joining</span>
+                    <input type="date" placeholder="Date of Joining" name="date_of_joining" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Course</span>
+                    <input type="text" placeholder="B Tech: Computer Science and Engineering" disabled>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">College</span>
+                    <input type="text" placeholder="School of Engineering" disabled>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Department</span>
+                    <input type="text" placeholder="Computer Science and Engineering" disabled>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Current Semester</span>
+                    <select name="semester">
+                      <option value="" selected disabled hidden>Choose Current Semester</option>
+                      <option value="I">S1</option>
+                      <option value="II">S2</option>
+                      <option value="III">S3</option>
+                      <option value="IV">S4</option>
+                      <option value="V">S5</option>
+                      <option value="VI">S6</option>
+                      <option value="VII">S7</option>
+                      <option value="VIII">S8</option>
+                    </select>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Scheme</span>
+                    <input type="text" placeholder="Scheme" name="scheme" pattern="[0-9]+" minlength="4" maxlength="4" required>
+                  </div>
+                  <div class="inputfield">
+                    <span class="details">Upload Photo-jpeg</span>
+                    <input type="file" class="input" accept="image/jpeg" name="photo" required>
+                  </div>    
+                </div>
+                <div class="gender-details">
+                  <input type="radio" name="gender" id="dot-10" value="male">
+                  <input type="radio" name="gender" id="dot-11" value="female">
+                  <input type="radio" name="gender" id="dot-12" value="prefer not to say">
+                  <span class="gender-title">Gender</span>
+                  <div class="category">
+                    <label for="dot-10">
+                    <span class="dot one"></span>
+                    <span class="gender">Male</span>
+                  </label>
+                  <label for="dot-11">
+                    <span class="dot two"></span>
+                    <span class="gender">Female</span>
+                  </label>
+                  <label for="dot-12">
+                    <span class="dot three"></span>
+                    <span class="gender">Prefer not to say</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="button">
+                  <input type="submit" value="Register">
+                </div>
+              </form>
+            </div>
+          </div>
+     <!-- clickdiv1 -->
+          
+     <!-- clickdiv2 -->
+          <div class="addbox" id="stwo">
+            <div class="title">Delete Student</div>
+            <table id="sdelete">
+              <thead>
+                 <tr>
+                     <th>Register Number</th>
+                     <th>Name</th>
+                     <th>Date of Joining</th>
+                     <th>Action</th>
+                  </tr>
+              </thead>
+              {{#each students}}
+                <tr>
+                    <td>{{this.register_no}}</td>
+                    <td>{{this.name}}</td>
+                    <td>{{this.year_of_joining}}</td>
+                    <td><button id={{this.register_no}} onclick="reply(this.id)">Delete</button></td>
+                </tr>
+              {{/each}}
+            </table>
+          </div>
+     <!-- clickdiv2 -->
+     
+      <!-- clickdiv3 -->
+          <div class="addbox" id="sthree">
+            <div class="title">Update student details</div>
+            <div class="addcontent">
+              <form action="/admin/updateStudent" method="POST" enctype="multipart/form-data">
+                <div class="user-details">
+                  <div class="input-box">
+                    <span class="details">Select Account</span>
+                    <select id="stdselect" name="select">
+                      <option value="" selected disabled hidden>Register Number</option>
+                      {{#each students}}
+                      <option value={{this.register_no}}>{{this.register_no}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                   <div class="input-box">
+                    <span class="details">Name</span>
+                    <input type="text" placeholder="name" id="sname" name="name" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Register Number</span>
+                    <input type="text" placeholder="Register Number" id="sreg" name="reg" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Date of Birth</span>
+                    <input type="date" id="sdob" name="dob" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Date of admission</span>
+                    <input type="date" placeholder="Date of admission" id="sdoa" name="doa" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Father's name</span>
+                    <input type="text" placeholder="Father's name" id="sfather" name="father" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Mother's name</span>
+                    <input type="text" placeholder="Mother's name" id="smother" name="mother" required>
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Gender</span>
+                    <input type="text" placeholder="gender" id="sgender" name="gender" required>
+                  </div>
+                  
+                </div>
+                <div class="button">
+                  <input type="submit" value="Submit">
+                </div>
+              </form>
+            </div>            
+          </div>
+     <!-- clickdiv3 -->
+
+     <!-- clickdiv4 -->
+     <div class="addbox" id="sfour">
+      <div class="title">List of Students</div>
+      <table>
+        <thead>
+           <tr>
+               <th>Permanent Employee ID</th>
+               <th>Name</th>
+               <th>Date of birth</th>
+               <th>Email</th>
+               <th>Phone</th>
+               <th>Address</th>
+               <th>City</th>
+               <th>District</th>
+               <th>State/UT</th>
+               <th>Pincode</th>
+               <th>Date of joining</th>
+               <th>Course</th>
+            </tr>
+        </thead>
+        {{#each students}}
+          <tr>
+              <td>{{this.register_no}}</td>
+              <td>{{this.name}}</td>
+              <td>{{this.DOB}}</td>
+              <td>{{this.email}}</td>
+              <td>{{this.phone}}</td>
+              <td>{{this.phone}}</td>
+              <td>{{this.post}}</td>
+              <td>{{this.district}}</td>
+              <td>{{this.state}}</td>
+              <td>{{this.pincode}}</td>
+              <td>{{this.year_of_joining}}</td>
+              <td>BTech : CSE</td>
+          </tr>
+        {{/each}}
+      </table>
+    </div>
+     <!-- clickdiv4 -->
+    
+    <!-- clickdivs ENDS HERE -->
+</main>
+<!--main 3 of admn mangmnt-->
+
+<!--main 4 -->
+  <main id="main4">
+    <div class="main__container">
+
+      <!-- Buttons STARTS HERE -->
+        <div class="btns">
+          <br>
+          <h1>Requests & Applications(Teachers)</h1>
+          <div class="small_cards">
+            <button class="card" onclick="show_hide13()">
+              <div class="card_inner">
+                <a class="text-primary-p">Pending</a>
+              </div>
+            </button> 
+
+            <button class="card" onclick="show_hide14()">
+              <div class="card_inner">
+                <a class="text-primary-p">Approval Status</a>
+              </div>
+            </button>
+
+            <button class="card" onclick="show_hide15()">
+              <div class="card_inner">
+                <a class="text-primary-p">Archived</a> 
+              </div>
+            </button>
+          </div>
+        </div>
+      <!-- buttons ENDS HERE -->
+  
+      <!-- clickdivs start HERE -->
+        <div class="divbox">
+          <!-- clickdiv1 -->
+            <div class="addbox"  id="rone">
+              <div class="title">Pending</div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Permanent Employee ID</th>
+                    <th>Name</th>
+                    <th>Application/Request</th>
+                    <th>Purpose</th>
+                    <th>Date Recieved</th>
+                    <th>Attachments</th>
+                  </tr>
+                </thead>
+                {{#each treqP}}
+                  <tr>
+                      <td>{{this.PEN_ID}}</td>
+                      <td>{{this.NAME}}</td>
+                      <td>{{this.REQUEST_FOR}}</td>
+                      <td>{{this.PURPOSE}}</td>
+                      <td>{{this.APPLIED_ON}}</td>
+                      <td><a><button><a href={{this.FEES_RECEIPT}} style="text-decoration: none; color: #fff;">View</a></button></td>
+                    </tr>
+                {{/each}}
+              </table>
+            </div>
+          <!-- clickdiv1 -->
+              
+          <!-- clickdiv2 -->      
+            <div class="addbox" id="rtwo">
+              <div class="title">Approval Status</div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Permanent Employee ID</th>
+                    <th>Name</th>
+                    <th>Application/Request</th>
+                    <th>Purpose</th>
+                    <th>Date Recieved</th>
+                    <th>Attachments</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                {{#each treqNP}}
+                  <tr>
+                    <td>{{this.PEN_ID}}</td>
+                      <td>{{this.NAME}}</td>
+                      <td>{{this.REQUEST_FOR}}</td>
+                      <td>{{this.PURPOSE}}</td>
+                      <td>{{this.APPLIED_ON}}</td>
+                      <td>{{this.FEES_RECEIPT}}</td>
+                      <td>{{this.STATUS}}</td>
+                  </tr>
+                {{/each}}
+              </table>
+            </div>
+          <!-- clickdiv2 -->
+
+          <!-- clickdiv3 -->
+            <div class="addbox" id="rthree">
+              <div class="title">Archive</div>
+              <form action="#">
+                <div class="user-details">
+                  <div class="input-box">
+                    <span class="details">Month</span>
+                    <input type="month"  required>
+                  </div>
+                </div>
+              </form>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Permanent Employee ID</th>
+                    <th>Name</th>
+                    <th>Application/Request</th>
+                    <th>Purpose</th>
+                    <th>Date Recieved</th>
+                    <th>Attachments</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                {{#each treqA}}
+                  <tr>
+                    <td>{{this.PEN_ID}}</td>
+                    <td>{{this.NAME}}</td>
+                    <td>{{this.REQUEST_FOR}}</td>
+                    <td>{{this.PURPOSE}}</td>
+                    <td>{{this.APPLIED_ON}}</td>
+                    <td>{{this.FEES_RECEIPT}}</td>
+                    <td>{{this.STATUS}}</td>
+                  </tr>
+                {{/each}}
+              </table>
+            </div>
+          <!-- clickdiv3 -->
+        </div>
+    </div>
+  </main>
+  <!--main 4 -->
+
+
+
+  <!--main 5 -->
+    <main id="main5">
+      <div class="main__container">
+
+     
+        <!-- Buttons STARTS HERE --> 
+          <div class="btns">
+            <br>
+            <h1>Requests & Applications(Students)</h1>
+            <div class="small_cards">
+
+                <button class="card" onclick="show_hide16()">
+                  <div class="card_inner">
+                    <a class="text-primary-p">Pending</a>
+                  </div>
+                </button>  
+    
+                <button class="card" onclick="show_hide17()">
+                  <div class="card_inner">
+                    <a class="text-primary-p">Approval Status</a>
+                  </div>
+                </button>
+    
+                <button class="card" onclick="show_hide18()">
+                  <div class="card_inner">
+                    <a class="text-primary-p">Archived</a> 
+                  </div>
+                </button>
+            </div>
+          </div>
+        <!-- buttons ENDS HERE -->
+  
+        <!-- clickdivs start HERE -->
+          <div class="divbox">
+            <!-- clickdiv1 -->
+              <div class="addbox"  id="rsone">
+                <div class="title">Pending</div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Register No.</th>
+                      <th>Name</th>
+                      <th>Application/Request</th>
+                      <th>Purpose</th>
+                      <th>Date Recieved</th>
+                      <th>Attachments</th>
+                    </tr>
+                  </thead>
+                  {{#each sreqP}}
+                    <tr>
+                      <td>{{this.REGISTER_NO}}</td>
+                      <td>{{this.NAME}}</td>
+                      <td>{{this.REQUEST_FOR}}</td>
+                      <td>{{this.PURPOSE}}</td>
+                      <td>{{this.APPLIED_ON}}</td>
+                      <td><a><button><a href={{this.FEES_RECEIPT}} style="text-decoration: none; color: #fff;">View</a></button></td>
+                    </tr>
+                  {{/each}} 
+                </table>
+              </div>
+            <!-- clickdiv1 -->
+                
+            <!-- clickdiv2 -->
+              <div class="addbox" id="rstwo">
+                <div class="title">Approval Status</div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Register No.</th>
+                      <th>Name</th>
+                      <th>Application/Request</th>
+                      <th>Purpose</th>
+                      <th>Date Recieved</th>
+                      <th>Attachments</th>
+                      <th>Actions</th>
+                   </tr>
+                 </thead>
+                 {{#each sreqNP}}
+                    <tr>
+                      <td>{{this.REGISTER_NO}}</td>
+                      <td>{{this.NAME}}</td>
+                      <td>{{this.REQUEST_FOR}}</td>
+                      <td>{{this.PURPOSE}}</td>
+                      <td>{{this.APPLIED_ON}}</td>
+                      <td>{{this.FEES_RECEIPT}}</td>
+                      <td>{{this.STATUS}}</td>
+                    </tr>
+                  {{/each}}
+                </table>
+              </div>
+            <!-- clickdiv2 -->
+      
+            <!-- clickdiv3 -->
+              <div class="addbox" id="rsthree">
+                <div class="title">Archive</div>
+                <form action="#">
+                  <div class="user-details">
+                    <div class="input-box">
+                      <span class="details">Month</span>
+                      <input type="month"  required>
+                    </div>
+                  </div>
+                </form>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Register No.</th>
+                      <th>Name</th>
+                      <th>Application/Request</th>
+                      <th>Purpose</th>
+                      <th>Date Recieved</th>
+                      <th>Attachments</th>
+                      <th>Actions</th>
+                   </tr>
+                  </thead>
+                  {{#each sreqA}}
+                    <tr>
+                      <td>{{this.REGISTER_NO}}</td>
+                      <td>{{this.NAME}}</td>
+                      <td>{{this.REQUEST_FOR}}</td>
+                      <td>{{this.PURPOSE}}</td>
+                      <td>{{this.APPLIED_ON}}</td>
+                      <td>{{this.FEES_RECEIPT}}</td>
+                      <td>{{this.STATUS}}</td>
+                    </tr>
+                  {{/each}}
+                </table>
+              </div>
+            <!-- clickdiv3 -->
+          </div>
+      </div>
+    </main>
+  <!--main 5 -->
+
+
+
+  <!--main 6-->
+    <main id="main6">
+      <img src="/construction.png" alt="" style="height:100%; width: 100%;">
+    </main>
+  <!--main 6-->
+
+  <!--main 7-->
+    <main id="main7">
+      <div class="main__container">
+       
+      
+        <!-- Buttons STARTS HERE -->
+          <div class="btns">
+            <br>
+             <h1>2015 Syllabus</h1>
+             <div class="small_cards">
+                <button class="card" onclick="show_hide19()">
+                    <div class="card_inner">
+                      <a class="text-primary-p">Semester 1 & 2</a>
+                    </div>
+                </button>  
+    
+                <button class="card" onclick="show_hide20()">
+                  <div class="card_inner">
+                    <a class="text-primary-p">Semester 3 to 8</a>
+                  </div>
+                </button> 
+             </div>
+          </div>
+        <!-- buttons ENDS HERE -->
+      
+        <!-- clickdivs start HERE -->
+          <div class="divbox">
+            <!-- clickdiv1 -->
+              <div class="addbox"  id="pdfone">
+                <div class="title">Semester 1 and Semester 2 Syllabus 2015 Scheme</div><br>
+                <object data="/fileUploads/syllabus/s1s2-2015.pdf" type="application/pdf" width="100%" height="700px" ></object>
+              </div>
+            <!-- clickdiv1 -->
+                
+            <!-- clickdiv2 -->
+              <div class="addbox" id="pdftwo">
+                <div class="title">Semester 3 to Semester 8 Syllabus 2015 Scheme</div><br>
+                <object data="/fileUploads/syllabus/s3s8-2015.pdf" type="application/pdf" width="100%" height="700px" ></object>
+              </div>
+            <!-- clickdiv2 -->
+          </div>
+      </div>
+    </main>
+  <!--main 7-->
+
+  <!--main 8-->
+    <main id="main8">
+      <div class="main__container">
+
+        <!-- Buttons STARTS HERE -->
+          <div class="btns">
+            <br>
+            <h1>2019 Syllabus</h1>
+            <div class="small_cards">
+              <button class="card" onclick="show_hide21()">
+                  <div class="card_inner">
+                    <a class="text-primary-p">Semester 1 & 2</a>
+                  </div>
+              </button>  
+    
+              <button class="card" onclick="show_hide22()">
+                <div class="card_inner">
+                  <a class="text-primary-p">Semester 3 to 8</a>
+                </div>
+              </button> 
+            </div>
+          </div>
+        <!-- buttons ENDS HERE -->
+      
+        <!-- clickdivs start HERE -->
+          <div class="divbox">
+            <!-- clickdiv1 -->
+              <div class="addbox"  id="pdf2019one">
+                <div class="title">Semester 1 and Semester 2 Syllabus 2019 Scheme</div><br>
+                <object data="/fileUploads/syllabus/s1s2-2015.pdf" type="application/pdf" width="100%" height="700px" ></object>
+              </div>
+            <!-- clickdiv1 -->
+                
+            <!-- clickdiv2 -->
+              <div class="addbox" id="pdf2019two">
+                <div class="title">Semester 3 to Semester 8 Syllabus 2019 Scheme</div><br>
+                <object data="/fileUploads/syllabus/s3s8-2015.pdf" type="application/pdf" width="100%" height="700px" ></object>
+              </div>
+            <!-- clickdiv2 -->
+          </div>
+        <!--clickdivs end HERE-->
+      </div>
+    </main>
+  <!--main 8-->
+
+  <!--main 9-->
+    <main id="main9">
+      <div class="main__container">
+      
+        
+        <!-- Buttons STARTS HERE -->
+          <div class="btns">
+            <br>
+            <h1>Syllabus Management</h1>
+              <div class="small_cards">
+                <button class="card" onclick="show_hide23()">
+                  <div class="card_inner">
+                    <a class="text-primary-p">Add Scheme and Syllabus</a>
+                  </div>
+                </button>  
+      
+                <button class="card" onclick="show_hide24()">
+                  <div class="card_inner">
+                    <a class="text-primary-p">Delete Scheme and Syllabus</a>
+                    </div>
+                </button>
+              </div>
+          </div>  
+        <!-- buttons ENDS HERE -->
+        
+        <!-- clickdivs start HERE -->
+          <div class="divbox">
+            <!-- clickdiv1 -->
+              <div class="addbox"  id="syone">
+                <div class="title">Add Scheme and Syllabus</div>
+                <div class="addcontent">
+                  <form action="#">
+                    <div class="user-details">
+                      <div class="input-box">
+                        <span class="details">Scheme Year</span>
+                        <input type="text" placeholder="Enter from which admission year this scheme is effective" required>
+                      </div>
+                      <div class="input-box">
+                        <span class="details">Select Semester</span>
+                        <select  id="semselect">
+                          <option value="" selected disabled hidden>Choose Semester</option>
+                          <option value="">Semester 1 & 2</option>
+                          <option value="">Semester 3 to 8</option>
+                        </select>
+                      </div>
+                      <div class="input-box">
+                        <span class="details">Date of update</span>
+                        <input type="date"  required>
+                      </div>
+                      <div class="input-box">
+                        <span class="details">Upload Scheme and syllabus as pdf</span>
+                        <input type="file" required>
+                      </div>
+                      <div class="input-box">
+                        <span class="details">Updated by</span>
+                        <input type="text" placeholder="Enter your name" required>
+                      </div>
+                      <div class="input-box">
+                        <span class="details">HOD at time of update</span>
+                        <input type="text" placeholder="Name of HOD" required>
+                      </div>
+                    </div>
+                    <div class="button">
+                      <input type="submit" value="Register">
+                    </div>
+                  </form>
+                </div>
+              </div>
+            <!-- clickdiv1 -->
+              
+            <!-- clickdiv2 -->
+              <div class="addbox" id="sytwo">
+                <div class="title">Delete Scheme and Syllabus</div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Scheme year</th>
+                      <th>Semesters</th>
+                      <th>Date of update</th>
+                      <th>File</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                    <tr>
+                      <td>2015</td>
+                      <td>Semester 1 & 2</td>
+                      <td>20/10/2021</td>
+                      <td><button><a  href="assets/s1s2.pdf" style="text-decoration: none; color: #fff;">View</a></button></td>
+                      <td><button>Delete</button></td>
+                    </tr>
+                </table>
+              </div>
+            <!-- clickdiv2 -->
+          </div>
+        <!--clickdiv ends here-->
+      </div>
+    </main>
+  <!--main 9-->
+
+
+  <!--main 10-->
+    <main id="main10">
+      <div class="main__container">
+        
+        <!-- Buttons STARTS HERE -->
+          <div class="btns">
+           <br>
+            <h1>News</h1>
+            <div class="small_cards">
+              <button class="card" onclick="show_hide27()">
+                <div class="card_inner">
+                  <a class="text-primary-p">Add News</a>
+                </div>
+              </button>                
+              <button class="card" onclick="show_hide28()">
+                <div class="card_inner">
+                  <a class="text-primary-p">Current Scroll</a>
+                </div>
+              </button>
+              <button class="card" onclick="show_hide29()">
+                <div class="card_inner">
+                  <a class="text-primary-p">Preview</a>
+                  </div>
+                </button>                         
+            </div>
+          </div>
+        <!-- buttons ENDS HERE -->
+    
+        <!-- clickdivs start HERE -->
+          <div class="divbox">
+            <!-- clickdiv1 -->
+              <div class="addbox"  id="newsone">
+                <div class="title">Add News</div>
+                <div class="addcontent">
+                  <form action="/admin/addNews" method="POST" enctype="multipart/form-data">
+                    <div class="user-details">
+                      <div class="input-box">
+                        <span class="details">News String</span>
+                        <input type="text" placeholder="Enter the news" name="string" required>
+                      </div>
+                      {{!-- <div class="input-box">
+                        <span class="details">Date </span>
+                        <input type="date"  required>
+                      </div>
+                      <div class="input-box">
+                        <span class="details">Attachements if any</span>
+                        <input type="file">
+                      </div>
+                      <div class="input-box">
+                        <span class="details">Updated by</span>
+                        <input type="text" placeholder="Enter your name" required>
+                      </div> --}}
+                    </div>
+                   <div class="button">
+                      <input type="submit" value="Submit">
+                    </div>
+                  </form>
+                </div>
+              </div>
+            <!-- clickdiv1 --
+            <!-- clickdiv2 -->
+              <div class="addbox" id="newstwo">
+                <div class="title">Current Scroll</div>
+                <table>
+                  <thead>
+                     <tr>
+                         <th>Date</th>
+                         <th>News String</th>
+                         <th>Action</th>
+                      </tr>
+                  </thead>
+                  {{#each news}}
+                    <tr>
+                        <td>{{this.news_date}}</td>
+                        <td>{{this.news_content}}</td>                          
+                        <td><button>Delete</button></td>
+                    </tr>
+                  {{/each}}
+                </table>
+              </div>
+            <!-- clickdiv2 --
+            <!-- clickdiv3 -->
+              <div class="addbox" id="newsthree">
+                <div class="title">Current Preview</div> <br>  
+                <marquee width="97.5%" direction="up" height="100px" id="marquee" scrollamount="5">
+                  {{#each news}}
+                    {{this.news_content}}.<hr>
+                  {{/each}}
+                </marquee>
+              </div>
+            <!-- clickdiv3 -->
+          </div>
+        <!--clickdiv ends here-->
+      </div>
+    </main>
+  <!--main 10-->
+
+
+  <!--main 14-->
+    <main id="main14">
+      <div class="main__container">
+       
+      
+        <!-- Buttons STARTS HERE -->
+          <div class="btns">
+            <br>
+            <h1>Notices</h1>
+            <div class="small_cards">
+              <button class="card" onclick="show_hide25()">
+                <div class="card_inner">
+                  <a class="text-primary-p">New notice</a>
+                </div>
+              </button>  
+
+              <button class="card" onclick="show_hide26()">
+                <div class="card_inner">
+                  <a class="text-primary-p">List</a>
+                </div>
+              </button>
+            </div>
+          </div>
+        <!-- buttons ENDS HERE -->
+      
+        <!-- clickdivs start HERE -->
+          <div class="divbox">
+            <!-- clickdiv1 -->
+              <div class="addbox"  id="noticeone">
+                <div class="title">Add Notice</div>
+                <div class="addcontent">
+                  <form action="/admin/addNotice" method="POST" enctype="multipart/form-data">
+                    <div class="user-details">
+                      <div class="input-box">
+                        <span class="details">Name</span>
+                        <input type="text" placeholder="Name of the notice" name="name" required>
+                      </div>
+
+                      <div class="input-box">
+                        <span class="details">Upload file as pdf</span>
+                        <input type="file" name="attachment" accept="application/pdf" required>
+                      </div>
+                    </div>
+
+                    <div class="button">
+                      <input type="submit" value="Register">
+                    </div>
+                  </form>
+                </div>
+              </div>
+            <!-- clickdiv1 -->
+                
+            <!-- clickdiv2 -->
+              <div class="addbox" id="noticetwo">
+                <div class="title">List</div>
+                <table>
+                  <thead>
+                    <tr>
+                       <th>Notice name</th>
+                       <th>Date</th>
+                       <th>File</th> 
+                     </tr>
+                  </thead>
+                  {{#each notice}}
+                    <tr>
+                      <td>{{this.name_of_notice}}</td>
+                      <td>{{this.date_uploaded}}</td>
+                      <td><button><a href={{this.attachment}} style="text-decoration: none; color: #fff;">View</a></button></td>
+                    </tr>
+                  {{/each}}
+                </table>
+              </div>
+            <!-- clickdiv2 -->
+          </div>
+        <!--clickdiv ends here-->
+      </div>
+    </main>
+  <!--main 14-->
+
+    <!--main 15-->
+  <main id="main15">
+    <img src="/construction.png" alt="" style="height:100%; width: 100%;">
+  </main>
+    <!--main 15-->
+
+     <!--main 16-->
+  <main id="main16">
+    <img src="/construction.png" alt="" style="height:100%; width: 100%;">
+  </main>
+    <!--main 16-->
+
+     <!--main 17-->
+  <main id="main17">
+    <img src="/construction.png" alt="" style="height:100%; width: 100%;">
+  </main>
+    <!--main 17-->
+
+     <!--main 18-->
+  <main id="main18">
+    <img src="/construction.png" alt="" style="height:100%; width: 100%;">
+  </main>
+    <!--main 18-->
+
+
+   
+
+<!--Sidebars-->
+      <div id="sidebar">
+        <div class="sidebar__title">
+          <div class="sidebar__img">
+            <a href="/admin/dashboard"><img id="logo" src="/logos/logow.png" alt="logo" width="100px" height="100px" /></a>
+            <a class="admn_panel" href="/admin/dashboard"><h1 style="font-family: 'Big Shoulders Stencil Display', cursive;">ADMIN</h1></a>
+          </div>
+        </div>
+
+        <div class="sidebar__menu">
+          <h2>Management</h2>
+          <div class="sidebar__link">
+            &emsp;<i class="fas fa-wrench" aria-hidden="true"></i>
+            <button onclick="mainshow1()">Admin Management</button>
+          </div>
+          <div class="sidebar__link">
+            &emsp;<i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
+            <button onclick="mainshow2()">Teacher Management</button>
+          </div>
+          <div class="sidebar__link">
+            &emsp;<i class="fas fa-user-graduate"></i>
+            <button onclick="mainshow3()">Student Management</button>
+          </div>
+
+          <h2>Applications & Requests</h2>
+          <div class="sidebar__link">
+            &emsp;<i class="fa fa-question"></i>
+            <button onclick="mainshow4()">Teachers</button>
+          </div>
+          <div class="sidebar__link">
+            &emsp;<i class="fab fa-adn"></i>
+            <button onclick="mainshow5()">Students</button>
+          </div>
+          <div class="sidebar__link">
+            &emsp;<i class="fa fa-calendar-check-o"></i>
+            <button onclick="mainshow6()">Special Permissions</button>
+          </div>
+
+          <h2>Syllabus Management</h2>
+          <div class="sidebar__link">
+            &emsp; <i class="far fa-circle"></i>
+            <button onclick="mainshow7()">2015</button>
+          </div>
+          <div class="sidebar__link">
+            &emsp;<i class="far fa-circle"></i>
+            <button onclick="mainshow8()">2019</button>
+          </div>
+          <div class="sidebar__link">
+            &emsp;<i class="far fa-circle"></i>
+            <button onclick="mainshow9()">Add/delete syllabus</button>
+          </div>
+
+          
+
+                    <!--mainshow10 and mainshow14 exists-->
+
+
+          
+
+
+          <h2>Finances</h2>
+          
+          <div class="sidebar__link">
+            &emsp;<i class="far fa-circle"></i>
+            <button onclick="mainshow15()">Full list</button>
+          </div>
+          <div class="sidebar__link">
+            &emsp;<i class="far fa-circle"></i>
+            <button onclick="mainshow16()">E-grants</button>
+          </div>
+          <div class="sidebar__link">
+            &emsp;<i class="far fa-circle"></i>
+            <button onclick="mainshow17()">Reimbursments</button>
+          </div>
+          <div class="sidebar__link">
+            &emsp;<i class="far fa-circle"></i>
+            <button onclick="mainshow18()">Fee defaulters</button>
+          </div>
+
+         
+          </div>
+      </div>
+      <!--sidebar ends-->
+    </div><!--dont delete main container div end-->
+    <script src="/admin_designs/js/script.js"></script>
+<!--clock for sessiontime-->
+  <script type="text/javascript">
+      const dateDiv = document.getElementById('clock');
+
+      function myDateFunction() {
+        const now = new Date();
+        const nowStr = now.toLocaleString('en-US');
+        dateDiv.innerHTML = nowStr;
+      }
+      setInterval(myDateFunction, 1);
+
+       function reply(clicked_id){
+          $.ajax({
+            url: '/admin/deleteStudent',
+            type: 'post',
+            data: {register_no: clicked_id}
+          });
+        }
+
+        function dlt_tchr(clicked_id){
+          $.ajax({
+            url: '/admin/deleteTeacher',
+            type: 'post',
+            data: {pen_id: clicked_id}
+          });
+        }
+
+        function dlt_admin(clicked_id){
+          $.ajax({
+            url: '/admin/deleteAdmin',
+            type: 'post',
+            data: {pen_id: clicked_id}
+          });
+        }
+
+        function view(clicked_id){
+          $.ajax({
+            url: '/admin/viewReceipt',
+            type: 'get',
+            data: {name: clicked_id},
+            success:function(response){
+              window.open(response);
+            }
+          });
+        }
+  </script>
+
+  <script>
+    $(document).ready(function(){
+      $("#register").keyup(function(){
+        var register_no = $(this).val().trim();
+        if(register_no != ''){
+          $.ajax({
+            url: '/admin/studentCheck',
+            type: 'post',
+            data: {register_no: register_no},
+            success: function(response){
+                $('#std_response').html(response);
+              }
+            });
+          }else{
+            $("#std_response").html("");
+          }
+      });
+
+      $("#tchr_pen").keyup(function(){
+        var pen = $(this).val().trim();
+        if(pen != ''){
+          $.ajax({
+            url: '/admin/teacherCheck',
+            type: 'post',
+            data: {pen: pen},
+            success: function(response){
+                $('#tchr_response').html(response);
+              }
+            });
+          }else{
+            $("#tchr_response").html("");
+          }
+      });
+
+      $("#admin_pen").keyup(function(){
+        var pen = $(this).val().trim();
+        if(pen != ''){
+          $.ajax({
+            url: '/admin/adminCheck',
+            type: 'post',
+            data: {pen: pen},
+            success: function(response){
+                $('#admin_response').html(response);
+              }
+            });
+          }else{
+            $("#admin_response").html("");
+          }
+      });
+
+      $("#tchrselect").change(function(){
+        var pen = $(this).val().trim();
+        if(pen!=''){
+          $.ajax({
+            url : '/admin/getTeacher',
+            type: 'get',
+            data: {pen : pen},
+            success: function(response){
+              document.getElementById("tname").value = response.name;
+              document.getElementById("tpen").value = response.PEN_ID;
+              document.getElementById("tdob").value = response.DOB
+              document.getElementById("tdoj").value = response.year_of_joining
+              document.getElementById("tgender").value = response.gender
+            }
+          });
+        }
+      })
+
+      $("#stdselect").change(function(){
+        var reg = $(this).val().trim();
+        if(reg!=''){
+          $.ajax({
+            url : '/admin/getStudent',
+            type: 'get',
+            data: {reg : reg},
+            success: function(response){
+              document.getElementById("sname").value = response.name;
+              document.getElementById("sreg").value = response.register_no;
+              document.getElementById("sdob").value = response.DOB;
+              document.getElementById("sdoa").value = response.year_of_joining;
+              document.getElementById("sgender").value = response.gender;
+              document.getElementById("sfather").value = response.father_name;
+              document.getElementById("smother").value = response.mother_name;
+            }
+          });
+        }
+      })
+      datePickerId.max = new Date().toISOString().split("T")[0]
+    });
+  </script>
+
+  </body>
+</html>

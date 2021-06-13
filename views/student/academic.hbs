@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/student_designs/css/academic.css" />
+    <link rel="icon" href="/logos/logo.png" type="image/x-icon">
+    <!--Poppins-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <!--Poppins-->
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <title>Student | Academics Details</title>
+    <script>
+      $(document).ready(function(){
+        $(".profile .icon_wrap").click(function(){
+          $(this).parent().toggleClass("active");
+          $(".notifications").removeClass("active");
+        });
+      });
+    </script>
+  </head>
+  <body id="body">
+    <div class="container"> <!--div closed at end-->
+      <nav class="navbar">
+        <a href="/student/dashboard"><img id="logo" src="/logos/newlogo.png" alt="logo"  style="width: 140px; margin-left: 10px ; "></a>
+        
+        <div class="navbar_right">
+          <div class="profile">
+            <div class="icon_wrap">
+                <span style="font-size: 1.2em;">Welcome : &emsp; </span>
+              <img src={{user.profile_picture}} alt="profile_pic">
+              <span class="number">{{user.register_no}} :</span><span class="name">{{user.name}}</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+    
+            <div class="profile_dd" >
+              <ul class="profile_ul" style=" list-style-type: none;">
+                <li class="profile_li"><a class="profile"><span class="picon"><i class="fas fa-cog"></i>
+                    </span>Settings</a>
+                    <a href="/logour" style="text-decoration: none;"><div class="btn">Logout</div></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+   
+
+
+      <main id="home">
+        <div class="main__container">          
+          <div class="main__cards">
+            <div class="card" id="heading">
+              <div class="card_inner"> 
+                <h1>ACADEMIC DETAILS</h1>
+              </div>            
+            </div>
+          </div>
+        </div>
+
+        <div class="charts"> 
+          <div class="charts__left">            
+            <div class="charts__left__cards">
+              <div class="coursebox">
+                <div class="title">
+                  Add certificate
+                </div>
+                <div class="form">
+                  <form enctype="multipart/form-data" action="/student/addAcademic" method="POST" onsubmit="return confirm('Proceed to entry?');">
+                    <div class="inputfield">
+                      <label>Qualified Exams</label>
+                    <div class="custom_select">
+                          <select name="qualifying" id="cert">
+                            <option value="" selected disabled hidden>Select</option>
+                            <option value="10th grade">10th grade</option>
+                            <option value="12th grade">12th grade</option>
+                            <option value="Laterla Entry">Lateral Entry</option>
+                            <option value="GATE">GATE</option>
+                          </select>
+                        </div>
+                    </div>
+
+                    <div class="inputfield">
+                      <div id="error" style="color: red; margin:auto"></div>
+                    </div>  
+                      
+                    <div class="inputfield">
+                      <label>Board of Examination</label>
+                      <input type="text" class="input" placeholder="CBSE/HSE/Secondary Education board" name="board" required>
+                    </div>  
+              
+                    <div class="inputfield">
+                      <label>Year of Passing</label>
+                      <input type="text" class="input" placeholder="Year" name="pass_out" required>
+                    </div>  
+      
+                    <div class="inputfield">
+                      <label>Attach Certificate</label>
+                      <input type="file" class="input" name="certificate" accept="application/pdf" required>
+                    </div> 
+                    
+                    <div class="inputfield">
+                      <input type="submit" value="Submit" class="btn" id="btn">
+                    </div>
+                  </form>
+                </div>
+              </div>   
+            </div>
+          </div>        
+          
+          <div class="charts__right">            
+            <div class="charts__right__cards">
+              <table>
+                <tr id="header">
+                  <th>Qualifying Certificate</th>
+                  <th>Board of Examination</th>
+                  <th>Year of Passing</th>
+                  <th>Certificate</th>
+                    
+                </tr>
+                {{#each data}}
+                <tr>
+                  <td>{{this.qualifying_degree}}</td>
+                  <td>{{this.board}}</td>
+                  <td>{{this.year}}</td>
+                  <td><a href="{{this.certificate}}" style="text-decoration: none; color: black;">View</a></td>
+                </tr>
+                {{/each}}
+              </table> 
+            </div>
+          </div>
+        </div>
+      </main>
+    </div><!--dont delete main container div end-->
+
+
+    <script src="/student_designs/js/script.js"></script>
+
+    <script>
+      $(document).ready(function(){
+        $('#cert').change(function(){
+          var cert = $(this).val().trim();
+
+          console.log(cert);
+          $.ajax({
+            url:'/student/cert',
+            type:'get',
+            data:{cert:cert},
+            success:function(response){
+              console.log(typeof(response));
+              console.log(response)
+              if(response===""){
+                $('#error').html(response);
+                $('#btn').prop('disabled',false)
+              }
+              else{
+                $('#error').html(response);
+                $('#btn').prop('disabled',true)
+              }
+            }
+          })
+        })
+      })
+    </script>
+  </body>
+</html>

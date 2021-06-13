@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/student_designs/css/attendance.css" />
+    <link rel="icon" href="/logos/logo.png" type="image/x-icon">
+    <!--Poppins-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <!--Poppins-->
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <title>Student | Attendance</title>
+    <script>
+      $(document).ready(function(){
+        $(".profile .icon_wrap").click(function(){
+          $(this).parent().toggleClass("active");
+          $(".notifications").removeClass("active");
+        });
+      });
+    </script>
+  </head>
+  <body id="body">
+    <div class="container"> <!--div closed at end-->
+      <nav class="navbar">
+        <a href="/student/dashboard"><img id="logo" src="/logos/newlogo.png" alt="logo"  style="width: 140px; margin-left: 10px ; "></a>
+        
+        <div class="navbar_right">
+          <div class="profile">
+            <div class="icon_wrap">
+                <span style="font-size: 1.2em;">Welcome : &emsp; </span>
+              <img src={{user.profile_picture}} alt="profile_pic">
+              <span class="number">{{user.register_no}} :</span><span class="name">{{user.name}}</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+    
+            <div class="profile_dd" >
+              <ul class="profile_ul" style=" list-style-type: none;">
+                <li class="profile_li"><a class="profile"><span class="picon"><i class="fas fa-cog"></i>
+                    </span>Settings</a>
+                    <a href="/logout" style="text-decoration: none;"><div class="btn">Logout</div></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>        
+      </nav>
+   
+
+
+      <main id="home">
+        <div class="main__container">          
+          <div class="main__cards">
+            <div class="card" id="heading">
+              <div class="card_inner">                
+                <h1>ATTENDANCE</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="main__container">          
+          <div class="main__cards">
+            <div class="card" id="select">
+              <div class="card_inner">                
+                <select name="sem" id="semester" class="select-control">
+                  <option value="" selected disabled hidden>Choose Semester</option>
+                  <option value="I">S1</option>
+                  <option value="II">S2</option>
+                  <option value="III">S3</option>
+                  <option value="IV">S4</option>
+                  <option value="V">S5</option>
+                  <option value="VI">S6</option>
+                  <option value="VII">S7</option>
+                  <option value="VIII">S8</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+       
+        <div class="charts">            
+          <div class="charts__right">            
+            <div class="charts__right__cards" id="showData">
+              {{!-- Attendance is shown here --}} 
+            </div>
+          </div>
+          </div>
+      </main>
+    </div><!--dont delete main container div end-->
+
+
+    {{!-- -------------------------Script-----------------------------------  --}}
+    <script src="/student_designs/js/script.js"></script>
+
+    <script type="text/javascript">
+      $('#semester').change(function(){
+        var sem = $(this).val().trim();
+        if(sem!=''){
+          $.ajax({
+            url   : '/student/getAttendance',
+            type  : 'get',
+            data  : {sem  : sem},
+            success : function(response){
+              
+              let attendance = toTable(response,"showData");
+              attendance.id = "att_tabID";
+            }
+          })
+        }
+      })
+    </script>
+  </body>
+</html>

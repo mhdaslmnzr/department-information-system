@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/teacher_designs/css/research.css" />
+    <link rel="icon" href="/logos/logo.png" type="image/x-icon">
+    <!--Poppins-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <!--Poppins-->
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Teacher | Research Students</title>
+    <script>
+      $(document).ready(function(){
+        $(".profile .icon_wrap").click(function(){
+          $(this).parent().toggleClass("active");
+          $(".notifications").removeClass("active");
+        });
+      });
+    </script>
+  </head>
+  <body id="body">
+    <div class="container"> <!--div closed at end-->
+      <nav class="navbar">
+        <a href="/teacher/dashboard"><img id="logo" src="/logos/newlogo.png" alt="logo"  style="width: 140px; margin-left: 10px ; "></a>
+        
+        <div class="navbar_right">
+          <div class="profile">
+            <div class="icon_wrap">
+                <span style="font-size: 1.2em;">Welcome : &emsp; </span>
+              <img src={{user.profile_picture}} alt="profile_pic">
+              <span class="number">{{user.designation}} :</span><span class="name">{{user.name}}</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+    
+            <div class="profile_dd" >
+              <ul class="profile_ul" style=" list-style-type: none;">
+                <li class="profile_li"><a class="profile"><span class="picon"><i class="fas fa-cog"></i>
+                  </span>Settings</a>
+                  <a href="/logout" style="text-decoration: none;"><div class="btn">Logout</div></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+   
+
+
+      <main id="home">
+        <div class="main__container">          
+          <div class="main__cards">
+            <div class="card" id="heading">
+              <div class="card_inner"> 
+                <h1>RESEARCH STUDENTS</h1>
+              </div>            
+            </div>
+          </div>
+        </div>
+
+        <div class="charts"> 
+          <div class="charts__left">            
+            <div class="charts__left__cards">
+              <div class="coursebox">
+                <div class="title">Add Student Details</div>
+                <div class="form">
+                  <form enctype="multipart/form-data" action="/teacher/newStudent" method="POST" onsubmit="return confirm('Proceed with the entry');">
+                    <div class="inputfield">
+                      <label>Name </label>
+                      <input type="text" class="input" placeholder="Name of Student" name="name" required>
+                    </div>
+                    
+                    <div class="inputfield">
+                      <label>Register Number</label>
+                      <input type="text" class="input" placeholder="Register Number" name="reg_no" id="reg" required>        
+                    </div>
+
+                    <div class="inputfield">
+                      <div id="res_response" style="color: red; margin:auto"></div>
+                    </div>
+                      
+                    <div class="inputfield">
+                      <label>Area of Research</label>
+                      <input type="text" class="input" placeholder="Area of Research" name="area" required>
+                    </div>  
+                    
+                    <div class="inputfield">
+                      <label>Date of Joining</label>
+                      <input type="date" class="input" placeholder="Date of joining" name="joined_on" id="datePickerID" required>
+                    </div> 
+                    
+                    <div class="inputfield">
+                      <input type="submit" value="Add" class="btn" id="submit_btn">
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>        
+          
+          <div class="charts__right">            
+            <div class="charts__right__cards">
+              <table>
+                <tr id="header">
+                  <th>Name</th>
+                  <th>Register Number</th>
+                  <th>Area of Research</th>
+                  <th>Date of Joining</th>    
+                </tr>
+                {{#each data}}
+                  <tr>
+                    <td>{{this.name}}</td>
+                    <td>{{this.reg_no}}</td>
+                    <td>{{this.area}}</td>
+                    <td>{{this.joined_on}}</td>
+                  </tr>
+                {{/each}}
+              </table> 
+            </div>
+          </div>
+        </div>
+      </main>
+    </div><!--dont delete main container div end-->
+
+
+    {{!-- ----------------------------Scripts------------------------- --}}
+    
+    <script src="/teacher_designs/js/scripts.js"></script>
+  
+    <script type="text/javascript">
+      datePickerID.max = new Date().toISOString().split("T")[0];
+
+      $(document).ready(function(){
+        $("#reg").keyup(function(){
+          var reg_no = $(this).val().trim();
+          if(reg_no != ''){
+            $.ajax({
+              url       : '/teacher/checkStudent',
+              type      : 'post',
+              data      : {reg_no: reg_no},
+              success   : function(response){
+                
+                  if(response === ""){
+
+                    $('#res_response').html(response)
+                    $('#submit_btn').prop('disabled', false)
+
+                  }else{
+
+                    $('#res_response').html(response)
+                    $('#submit_btn').prop('disabled', true)
+
+                  }
+                }
+              });
+            } else{
+              $("#res_response").html("");
+            }
+        });
+      });
+    </script>
+  </body>
+</html>

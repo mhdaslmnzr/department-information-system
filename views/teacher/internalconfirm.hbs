@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Teacher | Internal confirm view</title>
+        <!--Poppins-->
+        <link rel="preconnect" href="https://fonts.gstatic.com">    
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+        <!--Poppins-->
+        <link rel="icon" href="/logos/logo.png" type="image/x-icon">
+        <link rel="stylesheet" href="/teacher_designs/css/confirm.css">
+    </head>
+    
+    <body>
+        <center><h1 style="text-decoration: underline;">Internal Mark Preview</h1></center>
+        <form enctype="multipart/form-data" action="/teacher/uploadInternal" method="POST" onsubmit="return confirm('Proceed to update mark ?);">
+            <div class="top">
+            <label><b>Subject Code </b><input type="text" class="input" name="sub_code" readonly value={{subject}}></label>
+            <label><b>Internal </b><input type="text" class="input" name="number" readonly value="{{number}}"></label>
+            <label><b>Date </b><input type="date" class="input" name="date" readonly value={{date}}></label>
+            </div> 
+            <table id="mytable">
+                <tr id="header">
+                    <th>Register Number</th>
+                    <th>Marks</th>
+                </tr>
+                {{#each data}}
+                    <tr>
+                        <td><input type="text" class="input" name="reg_no" readonly value={{this.reg_no}}></td>
+                        <td><input type="text" class="input" name="marks" readonly value={{this.marks}}></td>
+                    </tr>
+                {{/each}}
+            </table>
+
+            <input type = "button" value = "Edit marks?" class = "btn1" onclick = "history.go(-1)">
+            <input type = "submit" value = "Submit marks?" class = "btn2">
+        </form>
+    </body>
+</html>

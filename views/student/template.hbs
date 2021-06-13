@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request</title>
+
+    <style>
+        .header 
+        {
+            padding: 25px;
+            text-align: center;
+            background:white;
+            color:black;
+            font-size: 15px;
+        }
+        .container {
+            width:960px;
+            margin: 2px auto;
+            padding: 25px 25px;
+            border:1px solid rgb(241, 17, 17);
+            background:#fff;
+        }
+
+        .p0{text-align: center;margin-top: 5px;margin-bottom: 0px;}
+        .p1{text-align: center;margin-top: 0px;margin-bottom: 0px;}
+        .p2{text-align: center;margin-top: 0px;margin-bottom: 0px;}
+        .p3{text-align: center;margin-top: 0px;margin-bottom: 0px;}
+        .p16{text-align: center;padding-left: 67px;margin-top: 165px;margin-bottom: 0px;}
+
+        .ft0{font: bold 27px 'Arial Black';line-height: 38px;}
+        .ft1{font: bold 15px 'Arial';line-height: 17px;}
+        .ft2{font: bold 15px 'Arial';line-height: 18px;}
+        .ft7{font: bold 13px 'Calibri';color: #7030a0;line-height: 50px; border-top: 1.5px solid #7030a0;}
+
+        .from{
+            text-align: left;
+            padding-left: 100px;
+            margin-top: 50px;
+            line-height: 5px;
+        }
+
+        .date{
+            text-align: left;
+            padding-left: 100px;
+            margin-top: 30px;
+            line-height: 5px;
+        }
+
+        .to{
+            text-align: left;
+            padding-left: 100px;
+            margin-top: 30px;
+            line-height: 5px;
+        }
+        .content{
+            text-align: justify;
+            padding-left: 100px;
+            margin-top: 50px;
+            line-height: 25px;
+        }
+
+        .salutation{
+            
+            padding-left: 100px;
+            margin-top: 30px;
+            line-height: 20px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <DIV class="dclr"></DIV>
+            <P class="p0 ft0">SCHOOL OF ENGINEERING</P>
+            <P class="p1 ft1">COCHIN UNIVERSITY OF SCIENCE AND TECHNOLOGY</P>
+            <P class="p2 ft1">KOCHI – 682 022, KERALA, S. INDIA</P>
+            <P class="p3 ft2">Phone: <NOBR>0484-2556187,</NOBR> 2544745, 2557405</P>
+            <hr style="height:2px;border-width:0;color:gray;background-color:red">
+ 
+            <!-- <h3 style="text-align: center;"><u>Request For Bonafide</u></h3> -->
+            <div class="from">
+                <p>From,</p>
+                <p>{{data.name}},</p>
+                <p>{{data.reg_no}}</p>
+                <p>B.Tech CSE,</p>
+            </div>
+            <div class="date">
+                <p>date.applied_on</p>
+            </div>
+            <div class="to">
+                <p>To,</p>
+                <p>SOE C-Section</p>
+                <p>SOE</p>
+            </div>
+
+            <div class="content">
+                <p><b>Subject:- </b>Request for the approval of {{data.request}}</p>
+                <p>
+                    Respected Sir/Madam,<br>&emsp;&emsp;
+                    Respectfully, I am {{data.name}}, from class of branch of your university
+                    having register number {{data.reg_no}}. I need this application for the <br> purpose:-  {{data.purpose}}.
+                    <br>I am hereby submitting the details of the payment receipts along with this request.
+                    
+                    I request you to kindly issue the request_name in my name at the earliest possible
+                </p>
+            </div>
+
+            <div class="salutation">
+                <p style="text-align: right;">
+                    Yours faithfully,<br>
+                </p>
+                <p style="text-align: left;">
+                    Date:- date<br>
+                    Place:- School Of Engineering
+                </p>
+                <p style="text-align: right;line-height: normal;">{{data.name}}</p>
+            </div>
+            
+
+            <P class="p16 ft7">Fax: +91- <NOBR>484-2550952</NOBR> &emsp;
+            <NOBR>E-mail:</NOBR> principal_soe@cusat.ac.in &emsp; <NOBR>www.cusat.ac.in</NOBR>
+            <p style="text-align: center; font-size: x-small; color: #7030a0; font-weight: bold;">Kindly forward this pdf to the respective departments</p>
+            </P>
+
+
+
+    </div>
+</body>
+</html>

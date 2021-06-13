@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <!--Poppins-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <!--Poppins-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/password_designs/studFac.css" />
+    <link rel="icon" href="/logos/logo.png" type="image/icon type">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+    <title>DIS | Settings</title>
+  </head>
+  <body id="body">
+    <div class="container">
+      <nav class="navbar">
+       <a href="/teacher/dashboard"><img id="logo" src="/logos/newlogo.png" alt="logo"  style="width: 140px; margin-left: 10px ; "></a>
+        
+        <div class="navbar_right">
+          <div class="profile">
+            <div class="icon_wrap">
+                <span style="font-size: 1.2em;">Welcome : &emsp; </span>
+              <img src={{user.PROFILE_PICTURE}} alt="profile_pic">
+              <span class="number">{{user.DESIGNATION}} : </span><span class="name">{{user.NAME}}</span>
+            </div>  
+          </div>
+        </div>
+      </nav>
+      
+
+     <!--main 1 admn management-->
+      <main id="main1">
+        <div class="main__container">
+          <!-- clickdivs start HERE -->
+            <div class="divbox">
+              <!-- clickdiv1 -->
+                <div class="addbox" >
+                  <h1>Change Password</h1>
+                  <div class="addcontent">
+                    <form onsubmit="return faculty()">
+                      <div class="user-details">
+                        <div class="input-box">
+                          <input type="password" placeholder="Enter your old password"  id="old" required>
+                        </div>
+                        <div class="input-box">
+                          <input type="password" placeholder="Enter your new password" id="new" required>
+                        </div>
+                        <div class="input-box">
+                          <input type="password" placeholder="Confirm your new password" id="confirm" required>
+                        </div>
+                      </div>
+                      <div class="printbutton">
+                        <input type="submit" value="Submit" class="printbtn">
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              <!-- clickdiv1 -->
+            </div>
+          <!-- clickdivs ENDS HERE -->
+        </div>
+      </main>
+      <!---->
+
+      <script src="/password_designs/validation.js"></script>
+    </div>
+  </body>
+</html>

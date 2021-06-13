@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/teacher_designs/css/attendance.css" />
+    <!--Poppins-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <!--Poppins-->
+    <link rel="icon" href="/logos/logo.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <title>Teacher | Attendance Entry</title>
+    <script>
+      $(document).ready(function(){
+        $(".profile .icon_wrap").click(function(){
+          $(this).parent().toggleClass("active");
+          $(".notifications").removeClass("active");
+        });
+      });
+    </script>
+  </head>
+  <body id="body">
+    <div class="container"> <!--div closed at end-->
+      <nav class="navbar">
+        <a href="/teacher/dashboard"><img id="logo" src="/logos/newlogo.png" alt="logo"  style="width: 140px; margin-left: 10px ; "></a>
+        
+        <div class="navbar_right">
+          <div class="profile">
+            <div class="icon_wrap">
+                <span style="font-size: 1.2em;">Welcome : &emsp; </span>
+              <img src={{user.profile_picture}} alt="profile_pic">
+              <span class="number">{{user.designation}} :</span><span class="name">{{user.name}}</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+    
+            <div class="profile_dd" >
+              <ul class="profile_ul" style=" list-style-type: none;">
+                <li class="profile_li"><a class="profile"><span class="picon"><i class="fas fa-cog"></i>
+                    </span>Settings</a>
+                    <a href="/logout" style="text-decoration: none;"><div class="btn">Logout</div></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <main id="home">
+        <div class="main__container">          
+          <div class="main__cards">
+            <div class="card" id="heading">
+              <div class="card_inner">                
+                <h1>ATTENDANCE ENTRY</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="main__container">          
+          <div class="main__cards">
+            <div class="card" id="select">
+              <div class="card_inner">                
+                <div class="inputfield" id="top-select">
+                  <label><b>Subject</b></label>
+                  <form enctype="application/x-www-form-urlencoded" action="/teacher/getDetails" method="GET" >
+                    <select name="sub_code" id="semester" class="select-control" onchange="this.form.submit()">
+                      <option value="" selected disabled hidden>Choose</option>
+                      {{#each sub}}
+                      <option value="{{this.SUB_CODE}}|{{this.SUB_NAME}}">{{this.SUB_NAME}} - {{this.SUB_CODE}} - SEM {{this.SEM}}</option>
+                      {{/each}}
+                    </select>&emsp;
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       
+        <div class="charts">            
+          <div class="charts__right">            
+            <div class="charts__right__cards">
+              <div class="coursebox">
+                <form enctype="application/x-www-form-urlencoded" action="/teacher/showAttendance" method="GET">
+                  <div class="inputfield" id="top-select">
+                    <label><b>Subject Code</b></label>
+                    <input type="text" class="input" placeholder="subject code" name="sub_code" value="{{code}}"  readonly required> &emsp;&emsp;&emsp;
+                    <label><b>Subject Name</b></label>
+                    <input type="text" class="input" placeholder="subject name" name="sub_name" value="{{sub_name}}" readonly required> &emsp;&emsp;&emsp;
+                    <label><b>Month</b></label>
+                    <input type="month" class="input" name="month" required> &nbsp;&nbsp;
+                    <label><b>Total Hours (Till date)</b></label>
+                    <input type="text" class="input" name="hrs" id="datePickerId" required>
+                  </div>
+                  <br><br>
+                  <table class="marktable">
+                    <tr id="header">
+                      <th>Register Number</th>
+                      <th>Attendance</th>
+                    </tr>
+                    {{#each data}}
+                    <tr>
+                      <td><input type="text" class="input" value="{{this.REGISTER_NO}}" name="reg_no" readonly></td>
+                      <td><input type="text" class="input" placeholder="Hours" name="present" required></td>
+                    </tr>
+                    {{/each}}
+                  <table>
+                  <div class="entrybtn">
+                    <input type="submit" value="Upload Attendance" class="btn" >
+                  </div>
+                </form>  
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div> <!--dont delete main container div end-->
+
+    {{!-- ---------------------------Scripts----------------- --}}
+
+    <script src="/teacher_designs/js/scripts.js"></script>
+
+    <script type="text/javascript">
+      datePickerId.max = new Date().toISOString().split("T")[0]
+    </script>
+  </body>
+</html>

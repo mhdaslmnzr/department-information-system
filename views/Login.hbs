@@ -1,0 +1,144 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>DIS | Login</title>
+    <!--Poppins-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <!--Poppins-->
+
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    /><link rel="stylesheet" href="/login_designs/style.css" />
+    <link rel="icon" href="/logos/logo.png" type="image/icon type">
+  </head>
+  <body>
+    
+    <!-- partial:index.partial.html -->
+    <!-- Wrapper Area -->
+    <div class="wrapper__area" id="wrapper_Area">
+      <!-- Forms Area -->
+      <div class="forms__area">
+        <!-- Login Form -->
+        <form class="login__form" id="loginForm" enctype="multipart/form-data" action="/auth/student/login_student" method="POST">
+          <!-- Form Title -->
+          <h1 class="form__title">Students' Login</h1>
+          <!-- inputs Groups -->
+          <div class="input__group">
+            <label class="field">
+              <input
+                type="text"
+                name="user_id"
+                placeholder="Register Number"
+                id="loginUserID"
+                required
+              />
+            </label>
+            <span class="input__icon"><i class="bx bx-user"></i></span>
+            <small class="input__error_message"></small>
+          </div>
+          <div class="input__group">
+            <label class="field">
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                id="loginstudent"
+                required
+              />
+            </label>
+            <span class="input__icon"><i class="bx bx-lock"></i></span>
+            <span class="showHide__Icon"><i class="bx bx-hide"></i></span>
+            <small class="input__error_message"></small>
+          </div>
+
+          {{#if stud_message}}
+            <h4 class="alert alert-danger">{{stud_message}}</h4>
+          {{/if}}
+          
+           <div class="form__actions">
+             <div class="forgot_password">Forgot Password?</div>
+          </div>
+          <!-- Login Button -->
+          <button
+            type="submit"
+            class="submit-button"
+            id="loginstudentBtn"
+          >Submit</button>
+
+        </form>
+        <!-- End Login Form -->
+
+        <!-- Sign Up Form -->
+        <form class="sign-up__form" id="signUpForm" enctype="multipart/form-data" method="POST" action="/auth/faculty/login_faculty">
+          <!-- Form Title -->
+          <h1 class="form__title">Teachers' Login</h1>
+          <!-- inputs Groups -->
+          <div class="input__group">
+            <label class="field">
+              <input
+                type="text"
+                name="pen"
+                placeholder="Permanent Employee ID"
+                id="loginpenID"
+                required
+              />
+            </label>
+            <span class="input__icon"><i class="bx bx-user"></i></span>
+            <small class="input__error_message"></small>
+          </div>
+          <div class="input__group">
+            <label class="field">
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                id="loginTeacher"
+                required
+              />
+            </label>
+            <span class="input__icon"><i class="bx bx-lock"></i></span>
+            <span class="showHide__Icon"><i class="bx bx-hide"></i></span>
+            <small class="input__error_message"></small>
+          </div>
+
+          {{#if tchr_message}}
+            <h4 class="alert alert-danger">{{tchr_message}}</h4>
+          {{/if}}
+          
+          <div class="form__actions">
+             <div class="forgot_password">Forgot Password?</div>
+          </div>
+          <!-- Login Button -->
+          <button
+            type="submit"
+            class="submit-button"
+            id="loginteacherBtn"
+          >Submit</button>
+        </form>
+        <!-- End Sign Up Form -->
+      </div><!-- End Forms Area -->
+
+      <!-- Aside Area -->
+      <div class="aside__area" id="aside_Area">
+        <div class="login__aside-info">
+          <h4>Welcome!</h4><br /><br/>
+          <img src="/login_designs/logo.png" alt="Image" />
+          <p>Not a student?<br />click below</p>
+          <button id="aside_signUp_Btn">Teachers' Login</button>
+        </div>
+        <div class="sign-up__aside-info">
+          <h4>Welcome!</h4><br /><br />
+          <img src="/login_designs/logo.png" alt="Image" />
+          <p>Not a Teacher? <br /> Click below</p>
+          <button id="aside_signIn_Btn">Students' Login</button>
+        </div>
+      </div>
+    </div>
+    <!-- End Wrapper Area -->
+    <!-- partial -->
+    <script src="/login_designs/script.js"></script>
+
+  </body>
+</html>

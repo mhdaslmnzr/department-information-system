@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/student_designs/css/requests.css" />
+    <link rel="icon" href="assets/logo.png" type="image/x-icon">
+    <!--Poppins-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <!--Poppins-->
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <title>Student | Application & Requests</title>
+    <script>
+      $(document).ready(function(){
+        $(".profile .icon_wrap").click(function(){
+          $(this).parent().toggleClass("active");
+          $(".notifications").removeClass("active");
+        });
+      });
+    </script>
+  </head>
+  <body id="body">
+    <div class="container"> <!--div closed at end-->
+      <nav class="navbar">
+        <a href="/student/dashboard"><img id="logo" src="/logos/newlogo.png" alt="logo"  style="width: 140px; margin-left: 10px ; "></a>
+        
+        <div class="navbar_right">
+          <div class="profile">
+            <div class="icon_wrap">
+                <span style="font-size: 1.2em;">Welcome : &emsp; </span>
+              <img src={{user.profile_picture}} alt="profile_pic">
+              <span class="number">{{user.register_no}} :</span><span class="name">{{user.name}}</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+    
+            <div class="profile_dd" >
+              <ul class="profile_ul" style=" list-style-type: none;">
+                <li class="profile_li"><a class="profile"><span class="picon"><i class="fas fa-cog"></i>
+                  </span>Settings</a>
+                  <a href="/logout" style="text-decoration: none;"><div class="btn">Logout</div></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+   
+
+
+      <main id="home">
+        <div class="main__container">          
+          <div class="main__cards">
+            <div class="card" id="heading">
+              <div class="card_inner"> 
+                <h1>Application & Requests</h1>
+              </div>            
+            </div>
+          </div>
+        </div>
+
+        <div class="charts"> 
+          <div class="charts__left">            
+            <div class="charts__left__cards">
+              <div class="coursebox">
+                <div class="title">Select application</div>
+                <div class="form">
+                  <div class="inputfield">
+                    <div class="custom_select">
+                      <select name="request" id="req_select">
+                        <option value="" selected disabled hidden>Select</option>
+                        <option value="Bonafide">Bonafide</option>
+                        <option value="Supplementary Exam Registration">Supplementary exam registration</option>
+                      </select>
+                    </div>
+                  </div> 
+                </div>
+              </div>
+              <table>
+                <tr id="header">
+                  <th>Applied Certifcates</th>
+                  <th>Applied On</th>
+                  <th>Application Status</th>
+                </tr>
+                {{#each data}}
+                  <tr>
+                    <td>{{this.request_for}}</td>
+                    <td>{{this.status}}</td>
+                    <td>{{this.applied_on}}</td>
+                  </tr>
+                {{/each}}
+              </table>
+            </div>
+          </div>        
+          
+          <div class="charts__right">            
+            <div class="charts__right__cards">
+              <div class="coursebox">
+                <div class="title">Application Form</div>
+                <div class="form">
+                  <form enctype="multipart/form-data" action="/student/apply" method="POST" onsubmit="return confirm('Proceed with the request?');">
+                    <div class="inputfield">
+                      <label>Applied For</label>
+                      <input type="text" class="input" placeholder="Select Application" id="req_for" readonly name="request" required>
+                    </div>
+
+                    <div class="inputfield">
+                      <label>Name</label>
+                      <input type="text" class="input" value="{{user.name}}" readonly name="name">
+                    </div>
+
+                    <div class="inputfield">
+                      <label>Register Number</label>
+                      <input type="number" class="input" value="{{user.register_no}}" readonly name="register_no">
+                    </div>
+                       
+                    <div class="inputfield">
+                      <label>Mobile number</label>
+                      <input type="number" class="input" value="{{user.phone}}" readonly>
+                    </div>
+          
+                    <div class="inputfield">
+                      <label>Email</label>
+                      <input type="email" class="input" value="{{user.email}}" readonly>
+                    </div>
+
+                    <div class="inputfield">
+                      <label>College & division</label>
+                      <input type="text" class="input" value="School of Engineering, Division Computer Science & Engineering" readonly>
+                    </div>
+
+                    <div class="inputfield">
+                      <label>Course & Branch</label>
+                      <input type="text" class="input" value="B.Tech-Computer Science and Engineering" readonly>
+                    </div> 
+                   
+                    <div class="inputfield">
+                      <label>Year of Admission</label>
+                      <input type="text" class="input" value="{{user.year_of_joining}}" readonly>
+                    </div>  
+
+                    <div class="inputfield">
+                      <label><b>Permanent address</b></label>
+                    </div>
+
+                    <div class="inputfield">
+                      <label>Address Line 1</label>
+                      <input type="text"  class="input"  value="{{user.address}}" name="address" required>
+                    </div>
+
+                    <div class="inputfield">
+                      <label>Address Line 2</label>
+                      <input  type="text" class="input"  value="{{user.post}}" name="post" required>
+                    </div>
+
+                    <div class="inputfield">
+                      <label>District</label>
+                      <input type="text"  class="input"  value="{{user.district}}" name="district" required>
+                    </div>
+
+                    <div class="inputfield">
+                      <label>State/Union territory</label>
+                      <input type="text"  class="input"  value="{{user.state}}" name="state" required>
+                    </div>
+
+                    <div class="inputfield">
+                      <label>Pin Code</label>
+                      <input type="text"  class="input"  value={{user.pincode}} name="pincode" required>
+                    </div>
+
+                    <div class="inputfield" >
+                      <label>Purpose of Certificate</label>
+                      <input type="text" class="input" placeholder="Enter your purpose here" required name="purpose">
+                    </div>
+            
+                    <div class="inputfield">
+                      <label>Attach Fee Reciept</label>
+                      <input type="file" class="input" required accept="application/pdf" name="receipt" >
+                    </div> 
+
+                    <div class="inputfield">
+                      <input type="submit" value="Submit" class="btn">
+                    </div>
+                  </form>
+                  {{#if message}}
+                    <h4 style="color: red;">{{message}}</h4>
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div> <!--dont delete main container div end-->
+
+
+    {{!-- --------------------------Scripts----------------------- --}}
+
+    <script src="/student_designs/js/script.js"></script>
+
+    <script type="text/javascript">
+       $('#req_select').change(function(){
+          var req = $(this).val().trim()
+          if(req!=''){
+            document.getElementById("req_for").value = req;
+          }
+        })
+    </script>
+  </body>
+</html>

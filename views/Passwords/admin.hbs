@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <!--Poppins-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <!--Poppins-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/password_designs/admin.css" />
+    <link rel="icon" href="/logos/logo.png" type="image/icon type">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+    <title>ADMIN | Settings</title>
+  </head>
+  <body id="body">
+    <div class="container">
+      <nav class="navbar">
+        
+      
+        <div id="dp-name">
+        <img src={{user.PROFILE_PICTURE}} alt="" id="top_dp"/>
+        <div id="dp-sub">
+        <h1>Hello : {{user.NAME}}</h1>
+        <p>Session: <span id="clock"></span></p> 
+        </div>
+        </div>
+        <div class="logout" onclick="togglePopup()"><i class="fa fa-power-off" ></i><a href="/logout">Log out</a></div>
+      </nav>
+      
+
+     <!--main 1 admn management-->
+      <main id="main1">
+        <div class="main__container">
+          <!-- clickdivs start HERE -->
+            <div class="divbox">
+              <!-- clickdiv1 -->
+                <div class="addbox" >
+                  <h1>Change Password</h1>
+                  <div class="addcontent">
+                    <form onsubmit="return faculty()">
+                      <div class="user-details">
+                        <div class="input-box">
+                          <input type="password" placeholder="Enter your old password" id="old" required>
+                        </div>
+                        <div class="input-box">
+                          <input type="password" placeholder="Enter your new password" id="new" required>
+                        </div>
+                        <div class="input-box">
+                          <input type="password" placeholder="Confirm your new password" id="confirm" required>
+                        </div>
+                      </div>
+                      <div class="printbutton">
+                        <input type="submit" value="Submit" class="printbtn" id="pass">
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              <!-- clickdiv1 -->
+            </div>
+          <!-- clickdivs ENDS HERE -->
+        </div>
+      </main>
+      <!---->
+      
+      
+     
+
+      <div id="sidebar">
+        <div class="sidebar__title">
+          <div class="sidebar__img">
+            <a href="/admin/dashboard"><img id="logo" src="/logos/logow.png" alt="logo" width="100px" height="100px" /></a>
+            <a href="/admin/dashboard" class="admn_panel"><h1 style="font-family: 'Big Shoulders Stencil Display', cursive;">ADMIN</h1></a>
+          </div>
+        </div>
+
+        <div class="sidebar__menu">
+          <h2>Settings</h2>
+          <div class="sidebar__link">
+            &emsp;</i>
+            <button onclick="mainshow1()">Change Password</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script src="/password_designs/validation.js"></script>
+    <script>
+      //date and time
+      const dateDiv = document.getElementById("clock");
+
+      function myDateFunction() {
+        const now = new Date();
+        const nowStr = now.toLocaleString("en-US");
+        dateDiv.innerHTML = nowStr;
+      }
+      setInterval(myDateFunction, 1);
+    </script>
+    
+  </body>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/admin_designs/css/styles_management.css" />
+    <link rel="icon" href="/logos/logo.png" type="image/icon type">
+    <!--Poppins-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <!--Poppins-->
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+    <title>ADMIN | Student Panel</title>
+  </head>
+  <body id="body">
+    <div class="container">
+      <nav class="navbar">
+        
+      
+        <div id="dp-name">
+        <img src={{user.profile_picture}} alt="" id="top_dp"/>
+        <div id="dp-sub">
+        <h1>Hello : {{user.name}}</h1>
+        <p>Session: <span id="clock"></span></p> 
+        </div>
+        </div>
+        <div class="logout" onclick="togglePopup()"><i class="fa fa-power-off" ></i><a href="/logout">Log out</a></div>
+      </nav>
+      <!--Popup-->
+      <div class="popup" id="popup-1">
+        <div class="overlay"></div>
+        <div class="content">
+          <h1>Thank You!</h1>
+          <p>Session ended.</p>
+          <h5>Redirecting now<a class="wavy">
+            <span style="--i:1;">.</span>
+            <span style="--i:2;">.</span>
+            <span style="--i:3;">.</span>
+            <span style="--i:4;">.</span></a></h5>
+        </div>
+      </div>
+
+     <!--main 1 admn management-->
+      <main id="main1">
+        <div class="main__container">
+          <!-- clickdivs start HERE -->
+            <div class="divbox">
+              <!-- clickdiv1 -->
+                <div class="addbox"  id="one">
+                  <div class="title">Internal Marks</div>
+                  <div class="addcontent">
+                    <form action="/admin/getMarks" enctype="application/x-www-form-urlencoded" method="GET">
+                      <div class="user-details">
+                        <div class="input-box">
+                          <select name="branch" id="branch">
+                            <option value="" selected="selected" hidden>Choose branch</option>
+                          </select> &emsp;
+                        </div>
+                        <div class="input-box">
+                          <select name="scheme" id="scheme">
+                            <option value="" selected="selected" hidden>Choose Scheme</option>
+                          </select> &emsp;
+                        </div>
+                        <div class="input-box" >
+                          <select name="semester" id="semester">
+                            <option value="" selected="selected" hidden>Choose Semester</option>
+                          </select>&emsp;
+                        </div>
+                        <div class="input-box" >
+                          <select name="year" id="yoj">
+                            <option value="" selected="selected" hidden>Choose Year of joining</option>
+                          </select>
+                        </div>
+                      </div>
+                    </form>
+                   
+                    <div id="Internal">
+                      <div id="showFirst"></div>
+                      <br>
+                      <div id="showSecond"></div>
+                    </div>
+                    <div class="printbutton">
+                    <input type="button" value="Print" class="printbtn" id="intbtn" onclick="Export('#Internal')">
+                  </div>
+                  </div>
+
+                </div>
+              <!-- clickdiv1 -->
+            </div>
+          <!-- clickdivs ENDS HERE -->
+        </div>
+      </main>
+      <!---->
+      
+      <!--main 2 admn mangemnt-->
+      <main id="main2">
+        <div class="main__container">
+          <!-- clickdivs start HERE -->
+            <div class="divbox">
+              <!-- clickdiv1 -->
+               <div class="addbox"  id="one">
+                  <div class="title">Attendance</div>
+                  <div class="addcontent">
+                    <form action="#">
+                      <div class="user-details">
+                        <div class="input-box">
+                          <select name="branch" id="brancha">
+                            <option value="" selected="selected" hidden>Choose branch</option>
+                          </select> &emsp;
+                        </div>
+                        <div class="input-box">
+                          <select name="scheme" id="schemea">
+                            <option value="" selected="selected" hidden>Choose Scheme</option>
+                          </select> &emsp;
+                        </div>
+                        <div class="input-box">
+                          <select name="semester" id="semestera">
+                            <option value="" selected="selected" hidden>Choose Semester</option>
+                          </select>
+                        </div> &emsp;
+                        <div class="input-box" >
+                          <select name="year" id="yoja">
+                            <option value="" selected="selected" hidden>Choose Year of joining</option>
+                          </select>
+                        </div>
+                      </div>
+                    </form>
+                    <div id="showAttendance">
+                      {{!-- Table Shown here --}}
+                    </div>  
+                  </div>
+                  <div class="printbutton">
+                    <input type="button" value="Print" class="printbtn" id="attbtn" onclick="Export('#tatt')">
+                  </div>
+                </div>
+              <!-- clickdiv1 -->   
+            </div>
+           <!-- clickdivs ENDS HERE -->
+        </div>
+      </main>
+      <!---->
+
+      <!--main 3 of admn managmnt-->
+      <main id="main3">
+        <div class="main__container">
+          <!-- clickdivs start HERE -->
+            <div class="divbox">
+              <!-- clickdiv1 -->
+                <div class="addbox"  id="one">
+                  <div class="title">Semester Results</div>
+                    <div class="addcontent">
+                      <form>
+                        <div class="user-details">
+                          <div class="input-box">
+                            <select name="" id="branchb">
+                              <option value="" selected="selected" hidden>Choose branch</option>
+                            </select> &emsp;
+                          </div>
+                          <div class="input-box">
+                            <select name="" id="schemeb">
+                              <option value="" selected="selected" hidden>Choose Scheme</option>
+                            </select> &emsp;
+                          </div>
+                          <div class="input-box">
+                            <select name="" id="semesterb">
+                              <option value="" selected="selected" hidden>Choose Semester</option>
+                            </select>
+                          </div> &emsp;
+                          <div class="input-box" >
+                            <select name="year" id="yojb">
+                              <option value="" selected="selected" hidden>Choose Year of joining</option>
+                            </select>
+                          </div>
+                        </div>
+                      </form>
+
+                      <div id="showData">
+                        {{!-- Table show here --}}
+                      </div>  
+                    </div>
+
+                    <div class="printbutton">
+                      <input type="button" value="Print" class="printbtn" id="sembtn" onclick="Export('#tsem')">
+                    </div>
+                </div>
+              <!-- clickdiv1 -->
+            </div>
+          <!-- clickdivs ENDS HERE -->
+        </div>
+      </main>
+     <!-- -->
+
+     <!--main 4 of admn managmnt-->
+     <main id="main4">
+      <div class="main__container">
+        <!-- clickdivs start HERE -->
+          <div class="divbox">
+            <!-- clickdiv1 -->
+              <div class="addbox"  id="one">
+                <div class="title">Internships</div>
+                  <div class="addcontent">
+                    <form>
+                      <div class="user-details">
+                        <div class="input-box">
+                          <select name="" id="branchc">
+                            <option value="" selected="selected" hidden>Choose branch</option>
+                          </select> &emsp;
+                        </div>
+                       </div>
+                    </form>
+
+                    <div id="showInternships">
+                      {{!-- Table show here --}}
+                    </div>  
+                  </div>
+
+                  <div class="printbutton">
+                    <input type="button" value="Print" class="printbtn" id="internalbtn" onclick="Export('#internView_tabID')">
+                  </div>
+              </div>
+            <!-- clickdiv1 -->
+          </div>
+        <!-- clickdivs ENDS HERE -->
+      </div>
+    </main>
+   <!-- -->
+
+   <!--main 5 of admn managmnt-->
+      <main id="main5">
+        <div class="main__container">
+          <!-- clickdivs start HERE -->
+          <div class="divbox">
+            <!-- clickdiv1 -->
+              <div class="addbox"  id="one">
+                <div class="title">Courses</div>
+                  <div class="addcontent">
+                    <form>
+                      <div class="user-details">
+                        <div class="input-box">
+                          <select name="" id="branchd">
+                            <option value="" selected="selected" hidden>Choose branch</option>
+                          </select> &emsp;
+                        </div>
+                       </div>
+                    </form>
+
+                    <div id="showCourses">
+                      {{!-- Table show here --}}
+                    </div>  
+                  </div>
+
+                  <div class="printbutton">
+                    <input type="button" value="Print" class="printbtn" id="coursebtn" onclick="Export('#courseView_tabID')">
+                  </div>
+              </div>
+            <!-- clickdiv1 -->
+          </div>
+        <!-- clickdivs ENDS HERE -->
+        </div>
+      </main>
+     <!-- -->
+     
+
+      <div id="sidebar">
+        <div class="sidebar__title">
+          <div class="sidebar__img">
+            <a href="/admin/dashboard"><img id="logo" src="/logos/logow.png" alt="logo" width="100px" height="100px" /></a>
+            <a href="/admin/dashboard" class="admn_panel"><h1 style="font-family: 'Big Shoulders Stencil Display', cursive;">ADMIN</h1></a>
+          </div>
+        </div>
+
+        <div class="sidebar__menu">
+          <h2>Student Panel</h2>
+          <div class="sidebar__link">
+            &emsp;</i>
+            <button onclick="mainshow1()">Internal Marks</button>
+          </div>
+          <div class="sidebar__link">
+            &emsp;</i>
+            <button onclick="mainshow2()">Attendance</button>
+          </div>
+          <div class="sidebar__link">
+            &emsp;
+            <button onclick="mainshow3()">Semester Results</button>
+          </div>
+          <div class="sidebar__link">
+            &emsp;
+            <button onclick="mainshow4()">Internships</button>
+          </div>
+          <div class="sidebar__link">
+            &emsp;
+            <button onclick="mainshow5()">Courses</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/admin_designs/js/management.js"></script>
+
+    <script type="text/javascript">
+
+      $(document).ready(function(){
+        //<-----------Sem Result---------------------------->
+          $('#yojb').change(function(){
+            var branch = document.getElementById("branchb").value;
+            var scheme = document.getElementById("schemeb").value;
+            var sem = document.getElementById("semesterb").value;
+            var year = $(this).val().trim()
+
+            $.ajax({
+              url     : '/admin/getResult',
+              type    : 'get',
+              data    :{branch:branch,scheme:scheme,semester:sem,year:year},
+              success : function(response){
+              
+                $("#showData").empty();
+                if(response===""){
+                  noEntry("#showData")
+                  $('#sembtn').hide();
+                }
+                else{
+                  let rslt = toTable(response,"showData")
+                  rslt.id = "tsem"
+                  $('#sembtn').show();
+                }
+              }
+            })
+          })
+
+        //<-----------------------Attendance---------------------->
+          $('#yoja').change(function(){
+            var branch = document.getElementById("brancha").value;
+            var scheme = document.getElementById("schemea").value;
+            var sem = document.getElementById("semestera").value;
+            var year = $(this).val().trim()
+
+            $.ajax({
+              url : '/admin/getAttendance',
+              type: 'get',
+              data:{branch:branch,scheme:scheme,semester:sem,year:year},
+              success: function(response){
+              
+                $("#showAttendance").empty();
+                if(response===""){
+                  noEntry("#showAttendance")
+                  $('#attbtn').hide()
+                } 
+                else{
+                  let att = toTable(response,"showAttendance") 
+                  att.id = "tatt"
+                  $('#attbtn').show()
+                }
+              }
+            })
+          });
+
+        //<----------------------Internal Marks------------------------->
+          $('#intbtn').hide()
+          $('#yoj').change(function(){
+            var branch = document.getElementById("branch").value;
+            var scheme = document.getElementById("scheme").value;
+            var sem = document.getElementById("semester").value;
+            var year = $(this).val().trim()
+
+            $.ajax({
+              url :'/admin/getFirstInternal',
+              type:'get',
+              data:{branch:branch,scheme:scheme,sem:sem,year:year},
+              success:function(response){
+
+                $("#showFirst").empty();
+                if(response===""){
+                  noEntry("#showFirst")
+                } 
+                else{
+                  first = toTable(response,"showFirst")
+                  first.id = "tfirst"
+                }
+              }
+            })
+
+            $.ajax({
+              url :'/admin/getSecondInternal',
+              type:'get',
+              data:{branch:branch,scheme:scheme,sem:sem,year:year},
+              success:function(response){
+
+                $("#showSecond").empty();
+                if(response===""){
+                  //noEntry("#showFirst")
+                } 
+                else{
+                  let sec = toTable(response,"showSecond");
+                  sec.id = "tsec"
+                  $('#intbtn').show()
+                }
+              }
+            })
+          })
+
+          $('#internalbtn').hide()
+          $('#branchc').change(function(){
+            let branch = $(this).val().trim()
+            $.ajax({
+              url     : '/admin/getInternships',
+              type    : 'get',
+              data    : {branch:branch},
+              success : function(response){
+
+                $("#showInternships").empty();
+                if(response===""){
+                  noEntry("#showInternships")
+                  $('#internalbtn').hide()
+                } 
+                else{
+                  let intershipView = toTable(response,"showInternships");
+                  intershipView.id = "internView_tabID"
+                  $('#internalbtn').show()
+                }
+              }
+            })
+          })
+
+          $('#coursebtn').hide()
+          $('#branchd').change(function(){
+            let branch = $(this).val().trim()
+            $.ajax({
+              url     : '/admin/getCourses',
+              type    : 'get',
+              data    : {branch:branch},
+              success : function(response){
+
+                $("#showCourses").empty();
+                if(response===""){
+                  noEntry("#showCourses")
+                  $('#coursebtn').hide()
+                } 
+                else{
+                  let courseView = toTable(response,"showCourses");
+                  courseView.id = "courseView_tabID"
+                  $('#coursebtn').show()
+                }
+              }
+            })
+          })
+      });
+
+    </script>
+  </body>
+</html>

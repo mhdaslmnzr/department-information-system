@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/admin_designs/css/styles_management.css" />
+    <!--Poppins-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <!--Poppins-->
+    <link rel="icon" href="/logos/logo.png" type="image/icon type">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <title>ADMIN | Teacher Panel</title>
+  </head>
+  <body id="body">
+    <div class="container">
+      <nav class="navbar">
+        
+      
+        <div id="dp-name">
+        <img src={{user.profile_picture}} alt="" id="top_dp"/>
+        <div id="dp-sub">
+        <h1>Hello : {{user.name}}</h1>
+        <p>Session: <span id="clock"></span></p> 
+        </div>
+        </div>
+        <div class="logout" onclick="togglePopup()"><i class="fa fa-power-off" ></i><a href="/logout">Log out</a></div>
+      </nav>
+      <!--Popup-->
+    <div class="popup" id="popup-1">
+      <div class="overlay"></div>
+      <div class="content">
+        <h1>Thank You!</h1>
+        <p>Session ended.</p>
+        <h5>Redirecting now<a class="wavy">
+          <span style="--i:1;">.</span>
+          <span style="--i:2;">.</span>
+          <span style="--i:3;">.</span>
+          <span style="--i:4;">.</span></a></h5>
+      </div>
+     </div>
+
+     <!--main 1 admn management-->
+      <main id="main1">
+        <div class="main__container">
+          <!-- clickdivs start HERE -->
+            <div class="divbox">
+              <!-- clickdiv1 -->
+                <div class="addbox"  id="one">
+                  <div class="title">Refresher courses</div> <br>
+                  <div class="addcontent">                    
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>PEN ID</th>
+                          <th>Faculty Name</th>
+                          <th>Name</th>
+                          <th>Topic Dealt</th>
+                          <th>Date</th>
+                          <th>Number of days</th>
+                          <th>Attached file</th>
+                        </tr>                                                       
+                      </thead>
+                      <tbody>
+                        {{#each courses}}
+                          <tr> 
+                            <td>{{this.PEN_ID}}</td>            
+                            <td>{{this.name}}</td>
+                            <td>{{this.course}}</td>
+                            <td>{{this.topic}}</td>
+                            <td>{{this.date}}</td>
+                            <td>{{this.total_days}}</td>
+                            <td><a href="{{this.certificate}}" style="text-decoration: none; color: black;">View</a></td>
+                          </tr>
+                        {{/each}}      
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              <!-- clickdiv1 -->
+            </div>
+          <!-- clickdivs ENDS HERE -->
+        </div>
+      </main>
+      <!---->
+      
+      <!--main 2 admn mangemnt-->
+      <main id="main2">
+        <div class="main__container">
+          <!-- clickdivs start HERE -->
+            <div class="divbox">
+              <!-- clickdiv1 -->
+                <div class="addbox"  id="one">
+                  <div class="title">Seminars and Conferences</div> <br>
+                    <div class="addcontent">
+                      <table>
+                        <thead>
+                         <tr>
+                            <th>PEN ID</th>
+                            <th>Faculty Name</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Topic Dealt</th>
+                            <th>Date</th>
+                            <th>Number of days</th>
+                          </tr>                                                       
+                        </thead>
+                        <tbody>
+                          {{#each seminar}}
+                            <tr>  
+                              <td>{{this.PEN_ID}}</td>           
+                              <td>{{this.name}}</td>
+                              <td>{{this.course}}</td>
+                              <td>{{this.type}}</td>
+                              <td>{{this.topic}}</td>
+                              <td>{{this.date}}</td>
+                              <td>{{this.total_days}}</td>
+                            </tr> 
+                          {{/each}}        
+                        </tbody>
+                      </table> 
+                    </div>
+                  </div>
+              <!-- clickdiv1 -->
+            </div>
+           <!-- clickdivs ENDS HERE -->
+      </main>
+      <!---->
+
+      <!--main 3 of admn managmnt-->
+      <main id="main3">
+        <div class="main__container">
+          <!-- clickdivs start HERE -->
+            <div class="divbox">
+              <!-- clickdiv1 -->
+                <div class="addbox"  id="one">
+                  <div class="title">Publications</div> <br>
+                  <div class="addcontent">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>PEN ID</th>
+                          <th>Faculty Name</th>
+                          <th>Title</th>
+                          <th>Name/Issue</th>
+                          <th>ISBN no.</th>
+                          <th>Published on</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {{#each publication}}
+                          <tr>
+                            <td>{{this.PEN_ID}}</td>
+                            <td>{{this.name}}</td>
+                            <td>{{this.title}}</td>
+                            <td>{{this.name}}</td>
+                            <td>{{this.ISBN}}</td>
+                            <td>{{this.year}}</td>
+                          </tr>
+                        {{/each}}
+                      </tbody>
+                    </table> 
+                  </div>
+                </div>
+              <!-- clickdiv1 -->
+            </div>
+          <!-- clickdivs ENDS HERE -->
+      </main>
+     <!-- -->
+     
+
+      <div id="sidebar">
+        <div class="sidebar__title">
+          <div class="sidebar__img">
+            <a href="/admin/dashboard"><img id="logo" src="/logos/logow.png" alt="logo" width="100px" height="100px" /></a>
+            <a href="/admin/dashboard" class="admn_panel"><h1 style="font-family: 'Big Shoulders Stencil Display', cursive;">ADMIN</h1></a>
+          </div>
+          </div>
+
+        <div class="sidebar__menu">
+          <h2>Teacher Panel</h2>
+          <div class="sidebar__link">
+            <button onclick="mainshow1()">Refresher courses</button>
+          </div>
+          <div class="sidebar__link">
+            <button onclick="mainshow2()">Seminars and Conferences</button>
+          </div>
+          <div class="sidebar__link">
+            <button onclick="mainshow3()">Publications</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script src="/admin_designs/js/management.js"></script>
+
+  </body>
+</html>

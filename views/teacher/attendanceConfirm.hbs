@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Teacher | Attendance confirm view</title>
+        <!--Poppins-->
+        <link rel="preconnect" href="https://fonts.gstatic.com">    
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+        <!--Poppins-->
+        <link rel="icon" href="/logos/logo.png" type="image/x-icon">
+        <link rel="stylesheet" href="/teacher_designs/css/confirm.css">
+    </head>
+    
+    <body>
+        <center><h1 style="text-decoration: underline;">ATTENDANCE PREVIEW</h1></center>
+        <form enctype="multipart/form-data" action="/teacher/UploadAttendance" method="POST" onsubmit="return confirm('Proceed to update')">
+            <div class="top">
+            <label><b>Subject Code </b><input type="text" class="input" name="sub_code" readonly value={{subject}}></label>
+            <label><b>Month </b><input type="month" class="input" name="month" readonly value={{date}}></label> 
+            <label><b>Total Hours (Till date) </b><input type="text" class="input" name="total" readonly value={{total}}></label> 
+            </div>
+            <table id="mytable">
+                <tr id="header">
+                    <th>Register Number</th>
+                    <th>Present</th>
+                    <th>Absent</th>
+                    <th>Percentage</th>
+                </tr>
+
+                {{#each data}}
+                    <tr>
+                        <td><input type="text" class="input" name="reg_no" readonly value={{this.reg_no}}></td>
+                        <td><input type="text" class="input" name="present" readonly value={{this.present}}></td>
+                        <td><input type="text" class="input" readonly value={{this.absent}}></td>
+                        <td><input type="text" class="input" readonly value={{this.percent}}></td>
+                    </tr>
+                {{/each}}
+            </table>
+
+            <input type="button" value="Edit attendance?" class="btn1" onclick="history.go(-1)">
+            <input type="submit" value="Submit attendance?" class="btn2">
+        </form>
+    </body>
+</html>

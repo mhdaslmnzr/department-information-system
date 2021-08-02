@@ -83,7 +83,7 @@ router.post('/studentCheck',(req,res)=>{
 
 router.post('/addStudent',(req,res) => {
     try {
-        const {reg_no,admn_no,name,gender,dob,address,city,district,state,pincode,semester,phone,email,date_of_joining,scheme} = req.body
+        const {reg_no,admn_no,name,gender,dob,address,city,district,state,pincode,semester,phone,email,date_of_joining,scheme,branch} = req.body
         var file = req.files.photo;
         var file_name = file.name;
         if(file.mimetype == "image/jpeg"){

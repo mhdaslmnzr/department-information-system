@@ -87,9 +87,10 @@ router.post('/addStudent',(req,res) => {
         var file = req.files.photo;
         var file_name = file.name;
         if(file.mimetype == "image/jpeg"){
-            Path = process.env.ADLTDP
+//             Path = process.env.ADLTDP
+                Path = "public/user_displayProfile/"
             file.mv(Path + file_name);
-            file_path = process.env.VIEWDP + file_name
+            file_path = "/user_displayProfile/" + file_name
             let password = process.env.STUDENT
             db.query("INSERT INTO LOGIN_STUD VALUES(?,?);",[reg_no,password],function(err,results){
                 db.query("INSERT INTO STUDENT_PROFILE VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",[reg_no,null,admn_no,name,gender,dob,null,null,address,city,district,state,pincode,semester,null,phone,email,date_of_joining,scheme,branch,file_path],function(err,add){

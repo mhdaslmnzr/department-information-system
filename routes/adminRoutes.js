@@ -92,7 +92,7 @@ router.post('/addStudent',(req,res) => {
             file_path = process.env.VIEWDP + file_name
             let password = process.env.STUDENT
             db.query("INSERT INTO LOGIN_STUD VALUES(?,?);",[reg_no,password],function(err,results){
-                db.query("INSERT INTO STUDENT_PROFILE VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",[reg_no,null,admn_no,name,gender,dob,null,null,address,city,district,state,pincode,semester,null,phone,email,date_of_joining,scheme,branch,file_path],function(err,add){
+                db.query("INSERT INTO STUDENT_PROFILE VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",[reg_no,null,admn_no,name,gender,dob,null,null,address,city,district,state,pincode,semester,null,phone,email,date_of_joining,scheme,branch,file_path],function(err,add){
                     console.log(add);
                     db.query("INSERT INTO ATTENDANCE (REGISTER_NO) VALUES (?)",reg_no,function(err,att){
                         db.query("INSERT INTO FIRST_INTERNALS (REGISTER_NO) VALUES (?)",reg_no,function(err,first){
